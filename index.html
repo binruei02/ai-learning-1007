@@ -860,8 +860,10 @@
         <div style="display: flex; align-items: center; gap: 0.8rem;">
           <div class="chat-avatar" style="background: rgba(0, 242, 254, 0.15); border-color: var(--accent-cyan); color: var(--accent-cyan);">🤖</div>
           <div>
-            <div style="font-weight: 800; font-size: 1.25rem; color: #fff;">高中自主學習破冰教練 (Coach Horizon)</div>
-            <div style="color: #10b981; font-size: 0.9rem; font-weight: 600;">● 蘇格拉底式即時引導中</div>
+            <div style="font-weight: 800; font-size: 1.25rem; color: #fff;">高中自主學習領航教練 (Coach Horizon)</div>
+            <div style="color: var(--accent-cyan); font-size: 0.92rem; font-weight: 700; margin-top: 0.2rem;">
+              💬 請輸入「請開始」，即可與我對話，讓我協助你完成你的自主學習歷程檔案
+            </div>
           </div>
         </div>
         <button class="btn" onclick="closeAiCoachModal()" style="padding: 0.4rem 0.9rem; font-size: 1.1rem;">✕ 關閉</button>
@@ -889,19 +891,25 @@
 
   <!-- Gemini Gem Setup Guide Modal -->
   <div id="geminiGuideModal" class="app-modal">
-    <div class="modal-card" style="max-width: 760px; height: auto; max-height: 85vh;">
+    <div class="modal-card" style="max-width: 780px; height: auto; max-height: 88vh;">
       <div class="modal-header">
         <div style="font-weight: 800; font-size: 1.3rem; color: #fff;">✨ 建立你的 Google Gemini 官方 Gem</div>
         <button class="btn" onclick="closeGeminiGuide()" style="padding: 0.4rem 0.9rem;">✕ 關閉</button>
       </div>
-      <div class="modal-body" style="gap: 1.5rem; color: #cbd5e1; font-size: 1.15rem; line-height: 1.7;">
+      <div class="modal-body" style="gap: 1.3rem; color: #cbd5e1; font-size: 1.1rem; line-height: 1.65;">
         <div>
-          <strong style="color: var(--accent-cyan); font-size: 1.25rem;">3 步驟將「自主學習教練」存入你的 Google Gemini：</strong>
-          <ol style="margin-left: 1.5rem; margin-top: 0.8rem; display: flex; flex-direction: column; gap: 0.6rem;">
-            <li>開啟 Google Gemini 官網（需登入 Google 帳號）。</li>
-            <li>點擊左下角「Gems 管理工具」$\rightarrow$「建立新 Gem」。</li>
-            <li>將下方 System Prompt 完整貼入「Instructions（操作說明）」，名稱取為「自主學習領航教練」即可！</li>
-            <li style="color: var(--accent-cyan); font-weight: 700;">建立完成後，在對話框輸入<strong>「請開始」</strong>，AI 即可使用蘇格拉底式的對話方式與你展開對話並擔任領航教練！</li>
+          <strong style="color: var(--accent-cyan); font-size: 1.25rem;">建立 Gem 欄位填寫說明（照著填即可）：</strong>
+          <ol style="margin-left: 1.5rem; margin-top: 0.8rem; display: flex; flex-direction: column; gap: 0.9rem;">
+            <li>開啟 Google Gemini 官網 $\rightarrow$ 點擊左下角「<strong>Gems 管理工具</strong>」$\rightarrow$「<strong>建立新 Gem</strong>」。</li>
+            <li><strong>【名稱 (Name)】</strong>：填入 <code>自主學習領航教練</code></li>
+            <li>
+              <strong>【說明 (Description)】</strong>：填入以下文字（學生開啟此 Gem 時即可看到提醒）：
+              <div style="margin-top: 0.4rem; padding: 0.7rem 1rem; background: rgba(0, 242, 254, 0.12); border: 1.5px solid rgba(0, 242, 254, 0.4); border-radius: 0.6rem; color: #fff; font-weight: 700; display: flex; justify-content: space-between; align-items: center; gap: 0.5rem;">
+                <span id="gemDescText">請輸入請開始，即可與我對話，讓我協助你完成你的自主學習歷程檔案</span>
+                <button class="btn primary" style="padding: 0.35rem 0.9rem; font-size: 0.9rem;" onclick="copyGemDesc()">📋 複製說明</button>
+              </div>
+            </li>
+            <li><strong>【操作說明 (Instructions)】</strong>：將下方系統提示詞複製貼上。</li>
           </ol>
         </div>
 
@@ -910,7 +918,7 @@
             <span style="font-size: 0.95rem; color: #94a3b8; font-weight: 700;">系統提示詞 (System Prompt)</span>
             <button class="btn primary" style="padding: 0.4rem 1rem; font-size: 0.95rem;" onclick="copyGemPrompt()">📋 複製提示詞</button>
           </div>
-          <div id="gemPromptText" style="max-height: 200px; overflow-y: auto; font-family: monospace; font-size: 0.9rem; color: #38bdf8; white-space: pre-wrap;"># Role: 高中自主學習領航教練 (Coach Horizon)
+          <div id="gemPromptText" style="max-height: 180px; overflow-y: auto; font-family: monospace; font-size: 0.9rem; color: #38bdf8; white-space: pre-wrap;"># Role: 高中自主學習領航教練 (Coach Horizon)
 
 ## 啟動機制 (Trigger)
 當學生在對話框輸入「請開始」時，你即刻以熱情且親切的語氣啟動「蘇格拉底式引導模式」，擔任其自主學習領航教練，透過多輪啟發式提問引導學生探索興趣並完成自主學習檔案。
@@ -1032,6 +1040,13 @@
       const text = document.getElementById('gemPromptText').innerText;
       navigator.clipboard.writeText(text).then(() => {
         alert('✅ 已複製 System Prompt！可直接貼入 Google Gemini 的 Gem Instructions。');
+      });
+    }
+
+    function copyGemDesc() {
+      const text = document.getElementById('gemDescText').innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        alert('✅ 已複製說明文字！可直接貼入 Gem 的「說明」欄位。');
       });
     }
 
