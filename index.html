@@ -730,8 +730,9 @@
         <div>
           <p class="subtitle">
             無需註冊帳號、不用安裝 App，手機掃描或點擊下方按鈕即可啟動引導：<br><br>
+            👉 <strong>操作說明：請在對話框輸入「請開始」</strong>，AI 即刻啟動<strong>蘇格拉底式對話方式</strong>，擔任你的自主學習領航教練：<br>
             1. 告訴教練：「我平常課餘時間最投入的一件事」<br>
-            2. 回答教練拋給你的 2 個關鍵思考問題<br>
+            2. 回答教練拋給你的 2 個關鍵啟發性問題<br>
             3. 在 3 分鐘內，教練將協助你梳理出 18 週專案計畫架構！
           </p>
 
@@ -871,7 +872,8 @@
       </div>
 
       <div style="padding: 0.6rem 1.5rem; background: rgba(10, 15, 25, 0.95); border-top: 1px solid rgba(255, 255, 255, 0.05); display: flex; gap: 0.6rem; flex-wrap: wrap;">
-        <span style="color: #94a3b8; font-size: 0.9rem; line-height: 2;">快捷測試：</span>
+        <span style="color: #94a3b8; font-size: 0.9rem; line-height: 2;">快捷指令：</span>
+        <button class="quick-topic-pill" style="background: var(--accent-cyan); color: #000; font-weight: 800;" onclick="sendQuickTopic('請開始')">🚀 請開始</button>
         <button class="quick-topic-pill" onclick="sendQuickTopic('我很喜歡玩原神和手遊抽卡')">🎮 手遊抽卡/原神</button>
         <button class="quick-topic-pill" onclick="sendQuickTopic('我放假都在追韓團 K-Pop 買周邊跑應援')">💃 韓團追星/應援</button>
         <button class="quick-topic-pill" onclick="sendQuickTopic('我超愛看動漫，特別是熱血運動番')">🎬 動漫與敘事</button>
@@ -879,7 +881,7 @@
       </div>
 
       <div class="modal-footer">
-        <input type="text" id="coachInput" class="chat-input" placeholder="輸入你課餘最常做的事（例如：打電動、看小說、烘焙...）" onkeydown="if(event.key==='Enter') sendUserMessage()" />
+        <input type="text" id="coachInput" class="chat-input" placeholder="請輸入「請開始」啟動蘇格拉底式引導..." onkeydown="if(event.key==='Enter') sendUserMessage()" />
         <button class="btn primary" onclick="sendUserMessage()">發送 ↵</button>
       </div>
     </div>
@@ -899,15 +901,19 @@
             <li>開啟 Google Gemini 官網（需登入 Google 帳號）。</li>
             <li>點擊左下角「Gems 管理工具」$\rightarrow$「建立新 Gem」。</li>
             <li>將下方 System Prompt 完整貼入「Instructions（操作說明）」，名稱取為「自主學習領航教練」即可！</li>
+            <li style="color: var(--accent-cyan); font-weight: 700;">建立完成後，在對話框輸入<strong>「請開始」</strong>，AI 即可使用蘇格拉底式的對話方式與你展開對話並擔任領航教練！</li>
           </ol>
         </div>
 
-        <div style="background: rgba(0,0,0,0.5); padding: 1.2rem; border-radius: 0.8rem; border-1px solid rgba(255,255,255,0.1);">
+        <div style="background: rgba(0,0,0,0.5); padding: 1.2rem; border-radius: 0.8rem; border: 1px solid rgba(255,255,255,0.1);">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
             <span style="font-size: 0.95rem; color: #94a3b8; font-weight: 700;">系統提示詞 (System Prompt)</span>
             <button class="btn primary" style="padding: 0.4rem 1rem; font-size: 0.95rem;" onclick="copyGemPrompt()">📋 複製提示詞</button>
           </div>
           <div id="gemPromptText" style="max-height: 200px; overflow-y: auto; font-family: monospace; font-size: 0.9rem; color: #38bdf8; white-space: pre-wrap;"># Role: 高中自主學習領航教練 (Coach Horizon)
+
+## 啟動機制 (Trigger)
+當學生在對話框輸入「請開始」時，你即刻以熱情且親切的語氣啟動「蘇格拉底式引導模式」，擔任其自主學習領航教練，透過多輪啟發式提問引導學生探索興趣並完成自主學習檔案。
 
 ## Context
 你是一位專精台灣「108課綱高中自主學習」的引導式教練。你的任務不是直接幫學生寫作業，而是透過蘇格拉底式的多輪對話，引導學生從「個人真實興趣」出發，收斂出兼具熱情與可行性的自主學習題目，並產出合規且吸睛的自主學習計畫書。
@@ -915,7 +921,7 @@
 ## Guidelines
 1. 嚴禁一次性說教或傾倒長篇大論：每次回覆最多問 1~2 個核心問題，維持對話互動。
 2. 禁止否定任何興趣：無論學生說動漫、打電動、美妝、追星、耍廢，都要接納，並引導找出背後的「知識機制（心理、科技、社會、設計、經濟）」。
-3. 語氣風格：像幽默、有見識的大學學長姊，口語、繁體中文，引導學生思考。</div>
+3. 語氣風格：像幽默、有見識的大學學長姊，口語、繁體中文，引導學生深度思考。</div>
         </div>
 
         <div style="display: flex; gap: 1rem; justify-content: flex-end;">
@@ -1036,9 +1042,8 @@
     function initCoachChat() {
       appendBotMessage(`
         👋 嗨！我是你的自主學習領航教練。<br><br>
-        在 108 課綱裡，自主學習不是要你當做加開一門考科，而是讓你能名正言順花時間研究你<strong>「真正有熱忱」</strong>的事。<br><br>
-        老實告訴我：平常課餘、放假沒人管你時，你最常花時間在什麼事情上面？<br>
-        <em>（打電動、追星、滑社群、看動漫、打球、甚至研究穿搭都可以，隨便說！）</em>
+        請在下方輸入<strong>「請開始」</strong>，我將以<strong>蘇格拉底式的啟發對話方式</strong>擔任你的領航教練，引導你從課外熱忱發掘題目，並協助你完成專屬的 108 課綱自主學習檔案！<br><br>
+        <em>（提示：你可以直接點擊下方的「🚀 請開始」快捷指令！）</em>
       `);
     }
 
@@ -1078,9 +1083,20 @@
       appendUserMessage(text);
       coachInput.value = '';
 
-      if (chatStep === 0) {
-        userInterest = text;
+      if (text.includes('開始')) {
         chatStep = 1;
+        appendBotMessage(`
+          🚀 <strong>蘇格拉底式引導模式已啟動！</strong><br><br>
+          在 108 課綱中，自主學習不是加開一門考科，而是讓你能名正言順花時間研究你<strong>「真正有熱忱」</strong>的事。<br><br>
+          老實告訴我：平常課餘、放假沒人管你時，你最常把時間花在什麼事情上面？<br>
+          <em>（例如：打原神/手遊、追韓團、看動漫、打籃球、玩穿搭、烘焙、甚至研究迷因...隨便說！）</em>
+        `);
+        return;
+      }
+
+      if (chatStep === 0 || chatStep === 1) {
+        userInterest = text;
+        chatStep = 2;
         // Simulate thoughtful coaching
         appendBotMessage(`
           🔍 <strong>太棒的興趣了！</strong> 很多人以為「${userInterest}」只是休閒娛樂，但只要套上跨學科視角，背後其實藏著深刻的專業機制：<br><br>
@@ -1091,7 +1107,7 @@
           我想向你請教一個核心問題：<strong>在體驗「${userInterest}」的過程中，最讓你感到著迷或好奇的具體細節是什麼？</strong><br>
           <em>（例如：數值平衡？美術視覺？故事情節？還是跟朋友互動的過程？）</em>
         `);
-      } else if (chatStep === 1) {
+      } else if (chatStep === 2) {
         chatStep = 2;
         appendBotMessage(`
           🎯 <strong>捕捉到你的核心動機了！</strong> 這正是最珍貴的原創研究視角。<br><br>
