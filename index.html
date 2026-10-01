@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>用 AI 點石成金：高中生自主學習實戰破局指南</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800;900&family=Noto+Sans+TC:wght@400;600;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #090b10;
+      --card-bg: rgba(18, 22, 34, 0.75);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --accent-cyan: #00f2fe;
+      --accent-purple: #9d4edd;
+      --accent-pink: #ff2a85;
+      --accent-green: #10b981;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --grad-primary: linear-gradient(135deg, #00f2fe 0%, #4facfe 50%, #9d4edd 100%);
+      --grad-hot: linear-gradient(135deg, #ff0844 0%, #ffb199 100%);
+      --grad-dark: radial-gradient(circle at top right, rgba(157, 78, 221, 0.15), transparent 60%),
+                    radial-gradient(circle at bottom left, rgba(0, 242, 254, 0.12), transparent 50%),
+                    #090b10;
+    }
+
+    html {
+      font-size: clamp(19px, 1.3vw, 25px);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+    }
+
+    body {
+      background: var(--grad-dark);
+      color: var(--text-main);
+      font-family: 'Noto Sans TC', 'Plus Jakarta Sans', sans-serif;
+      overflow: hidden;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Presentation Screen Canvas */
+    #deck {
+      flex: 1;
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      pointer-events: none;
+      transform: scale(0.96) translateY(20px);
+      transition: opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+      padding: 3.5rem 5.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      z-index: 1;
+    }
+
+    .slide.active {
+      opacity: 1;
+      pointer-events: auto;
+      transform: scale(1) translateY(0);
+      z-index: 2;
+    }
+
+    /* Badges & Tags (大字體強化) */
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.5rem 1.4rem;
+      border-radius: 9999px;
+      background: rgba(0, 242, 254, 0.12);
+      border: 1.5px solid rgba(0, 242, 254, 0.4);
+      color: var(--accent-cyan);
+      font-size: 1.2rem; /* 遠大於 18pt */
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 1.25rem;
+    }
+
+    .tag.hot {
+      background: rgba(255, 42, 133, 0.15);
+      border-color: rgba(255, 42, 133, 0.5);
+      color: var(--accent-pink);
+    }
+
+    .tag.purple {
+      background: rgba(157, 78, 221, 0.18);
+      border-color: rgba(157, 78, 221, 0.5);
+      color: #c77dff;
+    }
+
+    /* Typography (大舞台大螢幕優化) */
+    h1.hero-title {
+      font-size: 3.6rem;
+      font-weight: 900;
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.02em;
+    }
+
+    .gradient-text {
+      background: var(--grad-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .gradient-text-hot {
+      background: linear-gradient(135deg, #ff2a85 0%, #ff758c 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    h2.section-title {
+      font-size: 2.7rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+      letter-spacing: -0.02em;
+    }
+
+    p.subtitle {
+      font-size: 1.45rem; /* ~30px */
+      color: var(--text-muted);
+      line-height: 1.65;
+      max-width: 950px;
+    }
+
+    /* Grid Layouts */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.2rem;
+      width: 100%;
+      margin-top: 1.8rem;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.8rem;
+      width: 100%;
+      margin-top: 1.8rem;
+    }
+
+    /* Glass Cards */
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      backdrop-filter: blur(16px);
+      border-radius: 1.35rem;
+      padding: 2.2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: var(--grad-primary);
+      opacity: 0.7;
+    }
+
+    .card.danger::before {
+      background: linear-gradient(90deg, #ef4444, #f87171);
+    }
+
+    .card.success::before {
+      background: linear-gradient(90deg, #10b981, #34d399);
+    }
+
+    .card h3 {
+      font-size: 1.6rem; /* 標題加大 */
+      font-weight: 800;
+      margin-bottom: 0.85rem;
+      color: #fff;
+    }
+
+    .card p {
+      font-size: 1.25rem; /* 內文全面提升至 25px+ */
+      color: #cbd5e1;
+      line-height: 1.7;
+    }
+
+    .card .icon {
+      font-size: 2.5rem;
+      margin-bottom: 0.8rem;
+    }
+
+    /* Comparison Box */
+    .versus-container {
+      display: grid;
+      grid-template-columns: 1fr 65px 1fr;
+      gap: 1.8rem;
+      width: 100%;
+      align-items: center;
+      margin-top: 1.8rem;
+    }
+
+    .vs-circle {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1.5px solid rgba(255, 255, 255, 0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 1.2rem;
+      color: var(--accent-cyan);
+      margin: 0 auto;
+    }
+
+    .code-block {
+      background: #05070a;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 0.9rem;
+      padding: 1.5rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.2rem; /* 程式/提示詞大字呈現 */
+      color: #38bdf8;
+      line-height: 1.65;
+      margin-top: 1rem;
+      user-select: text;
+    }
+
+    /* Live Interactive Demo Box */
+    .alchemist-box {
+      width: 100%;
+      background: rgba(18, 22, 34, 0.92);
+      border: 1.5px solid rgba(0, 242, 254, 0.4);
+      border-radius: 1.5rem;
+      padding: 2.2rem;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+      margin-top: 1.5rem;
+    }
+
+    .quick-chips {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-top: 1.2rem;
+    }
+
+    .chip-btn {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #f1f5f9;
+      padding: 0.75rem 1.5rem;
+      border-radius: 999px;
+      font-size: 1.2rem; /* 放大標籤按鈕 */
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .chip-btn:hover, .chip-btn.active {
+      background: var(--accent-cyan);
+      color: #000;
+      font-weight: 800;
+      border-color: var(--accent-cyan);
+      transform: translateY(-2px);
+    }
+
+    .alchemist-result {
+      margin-top: 1.5rem;
+      padding: 1.8rem;
+      background: rgba(0, 0, 0, 0.45);
+      border-radius: 1rem;
+      border-left: 5px solid var(--accent-cyan);
+      font-size: 1.3rem; /* 成果展示大字體 */
+      line-height: 1.75;
+    }
+
+    /* UI Controls & Navigation Bar */
+    #controls {
+      height: 75px;
+      background: rgba(9, 11, 16, 0.92);
+      backdrop-filter: blur(14px);
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 3.5rem;
+      z-index: 100;
+    }
+
+    .btn {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #fff;
+      padding: 0.75rem 1.4rem;
+      border-radius: 0.6rem;
+      font-size: 1.1rem; /* 按鈕字體調大 */
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      transition: all 0.2s;
+    }
+
+    .btn:hover {
+      background: rgba(255, 255, 255, 0.18);
+      border-color: rgba(255, 255, 255, 0.35);
+    }
+
+    .btn.primary {
+      background: var(--accent-cyan);
+      color: #000;
+      border: none;
+    }
+
+    .btn:hover {
+      background: rgba(255, 255, 255, 0.16);
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+
+    .btn.primary {
+      background: var(--accent-cyan);
+      color: #000;
+      border: none;
+    }
+
+    .progress-bar-wrap {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    #progressBar {
+      height: 100%;
+      width: 5%;
+      background: var(--grad-primary);
+      transition: width 0.3s ease;
+    }
+
+    /* Speaker Notes Overlay */
+    #notesModal {
+      position: fixed;
+      bottom: 85px;
+      right: 3rem;
+      width: 420px;
+      max-height: 380px;
+      background: rgba(15, 23, 42, 0.96);
+      border: 1px solid rgba(0, 242, 254, 0.4);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.8);
+      display: none;
+      flex-direction: column;
+      z-index: 200;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: #cbd5e1;
+    }
+
+    #notesModal.show {
+      display: flex;
+    }
+
+    #notesModal h4 {
+      color: var(--accent-cyan);
+      margin-bottom: 0.5rem;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .qr-box {
+      background: #fff;
+      padding: 1rem;
+      border-radius: 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #000;
+      width: 220px;
+      height: 220px;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="deck">
+    <div class="progress-bar-wrap"><div id="progressBar"></div></div>
+
+    <!-- Slide 1: 震撼破題 -->
+    <div class="slide active" data-notes="【演講時間：00-08分】開場破冰，引起共鳴。不講說教式的教條，而是告訴學生：如何將日常休閒與真實熱情，透過 AI 與學科視角，轉化為具備深度與個人特色的自主學習專案。">
+      <div class="tag hot">💡 108 課綱高效加速器</div>
+      <h1 class="hero-title">
+        用 AI <span class="gradient-text">點石成金</span>：<br>
+        高中生自主學習的實戰破局指南
+      </h1>
+      <p class="subtitle">
+        告別「流於形式、毫無方向、應付了事」。今天只專注一件事：<br>
+        <strong>如何將你的課外熱忱與日常興趣，透過 AI 提煉成大學教授肯定的高品質自主學習檔案。</strong>
+      </p>
+    </div>
+
+    <!-- Slide 2: 高中生最大痛點 -->
+    <div class="slide" data-notes="【演講時間：08-16分】現場共鳴點：調查台下誰的自主學習計畫卡在『不知寫什麼』或是『進度落後』。客觀剖析自主學習最常見的三大盲區。">
+      <div class="tag">🔍 現況診斷</div>
+      <h2 class="section-title">自主學習的三大「常見盲區」</h2>
+      <p class="subtitle">捫心自問，你的 18 週自主學習是否也遇過這些瓶頸？</p>
+      <div class="grid-3">
+        <div class="card danger">
+          <div class="icon">😴</div>
+          <h3>缺乏具體目標</h3>
+          <p>開學初沒有清楚架構，不知從何著手，不知不覺時間流逝，缺乏實質進展。</p>
+        </div>
+        <div class="card danger">
+          <div class="icon">📋</div>
+          <h3>題目過於宏大</h3>
+          <p>題目選了「探討全球氣候變遷」或「量子運算」，卻缺乏可行切入點與實際探索能力。</p>
+        </div>
+        <div class="card danger">
+          <div class="icon">🏃</div>
+          <h3>期末倉促應付</h3>
+          <p>到了繳交成果前夕，才急忙上網查資料拼湊，產出缺乏個人思考的制式摘要報告。</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 3: 審查教授視角 -->
+    <div class="slide" data-notes="【演講時間：16-25分】換位思考：教授審閱檔案時間有限，最怕看到詞藻華麗卻空洞的 AI 罐頭文字，最想看到的是「真實動機」、「探索歷程」與「面對問題時的解決能力」。">
+      <div class="tag purple">👀 審查委員視角</div>
+      <h2 class="section-title">大學審查教授真正在意的是什麼？</h2>
+      <div class="grid-2">
+        <div class="card danger">
+          <h3>❌ 容易被忽視的平庸表現</h3>
+          <p>
+            • 僅有制式的「收穫良多、感謝指導」等空泛感言<br>
+            • 內容僅為網路資料與教科書內容的二次摘要<br>
+            • 表面看似完美無缺，實則缺乏個人真實探索與反思<br>
+            • 過度依賴 AI 潤飾：文筆華麗但毫無實質數據與實作細節
+          </p>
+        </div>
+        <div class="card success">
+          <h3>✨ 脫穎而出的關鍵亮點</h3>
+          <p>
+            • <strong>真實動機：</strong>清楚說明為何關注此議題，展現熱忱與好奇心<br>
+            • <strong>解題歷程：</strong>記錄實作遇到困難時，如何運用 AI 與資源尋找突破口<br>
+            • <strong>專案思維：</strong>具備界定問題、規劃進度與產出成果原型的能力<br>
+            • <strong>深度省思：</strong>誠實總結學習限制，並提出未來改進與深化方向
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 4: 興趣轉譯魔法 -->
+    <div class="slide" data-notes="【演講時間：25-40分】高潮示範環節！現場點擊下方按鈕切換不同興趣，展示如何將看似日常的休閒愛好，透過跨學科視角昇華為學術或專題題目。">
+      <div class="tag hot">⚗️ 興趣轉譯</div>
+      <h2 class="section-title">沒有微不足道的興趣，只有未被發掘的學科視角</h2>
+      <p class="subtitle">只要套上專業學科透鏡，任何日常休閒都能轉化為高水準的自主學習題目：</p>
+      
+      <div class="alchemist-box">
+        <div style="font-weight: 700; color: #94a3b8;">現場點擊測試：選擇一項你有興趣的課外領域</div>
+        <div class="quick-chips">
+          <button class="chip-btn active" onclick="switchTopic('gacha')">🎰 遊戲機制 / 數值運算</button>
+          <button class="chip-btn" onclick="switchTopic('idol')">💃 流行文化 / 社群傳播</button>
+          <button class="chip-btn" onclick="switchTopic('meme')">🐸 網路迷因 / 青年語言文化</button>
+          <button class="chip-btn" onclick="switchTopic('sleep')">🛌 生物時鐘 / 睡眠聲學實驗</button>
+        </div>
+
+        <div id="topicOutput" class="alchemist-result">
+          <!-- JS Dynamic content -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 5: 人機對決對比 -->
+    <div class="slide" data-notes="【演講時間：40-55分】示範無效提問與高階提問的對比。強調：不要把 AI 當作偷懶代筆工具，而是作為引導深度思考的專案思辨教練。">
+      <div class="tag">⚡ 提示工程實戰</div>
+      <h2 class="section-title">為什麼多數人的 AI 協作總是成效不彰？</h2>
+      <p class="subtitle">籠統的指令只能得到平庸的回應；精準的引導能激發出高層次的批判思考。</p>
+      
+      <div class="versus-container">
+        <div class="card danger">
+          <h3>❌ 常見的被動式提問</h3>
+          <div class="code-block">
+            「請幫我寫一份高二自主學習計畫，我想做動漫相關的，請幫我填滿 18 週進度。」
+          </div>
+          <p style="margin-top: 1rem; color: #f87171;">
+            結果：產出缺乏個人觀點的制式樣板，失去自主學習的自我探索意義。
+          </p>
+        </div>
+
+        <div class="vs-circle">VS</div>
+
+        <div class="card success">
+          <h3>💎 高階的「蘇格拉底式引導提問」</h3>
+          <div class="code-block">
+            「你扮演專業的高中專案導師。我對動漫產業有興趣，想探索具深度的自主學習題目。
+            請不要直接給我答案，而是向我提出 3 個具啟發性的思辨問題，引導我找出該領域在『商業運營』或『文化心理』層面的核心探討問題。」
+          </div>
+          <p style="margin-top: 1rem; color: #34d399;">
+            結果：AI 協助你釐清盲點，引導出真正結合個人熱忱與學科深度的原創主題！
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 6: 18 週避坑里程碑 -->
+    <div class="slide" data-notes="【演講時間：55-70分】解構 18 週進度規劃：6-6-6 階段式推進法。前六週建立文獻與架構，中六週原型實作，後六週成果彙整與反思。">
+      <div class="tag purple">🗓️ 專案管理指南</div>
+      <h2 class="section-title">18 週「階段式推進」規劃法則</h2>
+      <p class="subtitle">擺脫瑣碎的每週流水帳，採用結構化的「三大階段 (6-6-6)」推進原則：</p>
+      
+      <div class="grid-3">
+        <div class="card">
+          <div class="icon">🔍</div>
+          <h3>階段一：知識奠基 (W1-6)</h3>
+          <p>
+            • 核心產出：<strong>文獻整理、主題心智圖</strong><br>
+            • 每週定期與 AI 研討專業核心概念與研究方法。<br>
+            • 完成一篇 800 字的「背景動機與探討問題界定」。
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="icon">🛠️</div>
+          <h3>階段二：原型實作與試錯 (W7-12)</h3>
+          <p>
+            • 核心產出：<strong>具體可行的小型成果原型 (MVP)</strong><br>
+            • 撰寫程式腳本、進行數據統計、製作訪談問卷或設計方案。<br>
+            • <strong>關鍵記錄：遇到哪些實作挑戰？如何尋找解答？</strong>
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="icon">🏆</div>
+          <h3>階段三：成果整合與昇華 (W13-18)</h3>
+          <p>
+            • 核心產出：<strong>展示級成果報告＋深度反思</strong><br>
+            • 將專案成果以圖文排版、資訊圖表或簡報形式完整呈現。<br>
+            • 深入撰寫個人學習軌跡與未來延伸展望。
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 7: 現場掃碼實測 -->
+    <div class="slide" data-notes="【演講時間：70-90分】邀請全體同學拿出手機掃描 QR Code，進行 5-8 分鐘的互動對話實測，親身體驗由 AI 教練引導出個人專案草案的過程。">
+      <div class="tag hot">📱 全場連線實測</div>
+      <h2 class="section-title">立即體驗：你的專屬「自主學習引導教練」</h2>
+      <div class="grid-2" style="align-items: center;">
+        <div>
+          <p class="subtitle">
+            無需安裝任何軟體，手機掃描 QR Code 即可啟動對話：<br><br>
+            1. 告訴教練：「我平常課餘時間最投入的一件事」<br>
+            2. 回答教練拋給你的 2 個關鍵思考問題<br>
+            3. 在 3 分鐘內，教練將協助你梳理出 18 週專案計畫架構！
+          </p>
+          <div style="margin-top: 2rem;">
+            <span class="tag">💡 互動挑戰</span>
+            <p style="color: #38bdf8; font-size: 1.35rem; font-weight: 700; line-height: 1.6;">
+              「邀請 1~2 位同學分享剛梳理出的特色主題，我們現場共同探討能如何深化！」
+            </p>
+          </div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+          <div class="qr-box" style="width: 260px; height: 260px;">
+            <!-- 模擬 QR Code -->
+            <svg width="210" height="210" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="1.8">
+              <rect x="2" y="2" width="7" height="7" rx="1" fill="#000"/>
+              <rect x="15" y="2" width="7" height="7" rx="1" fill="#000"/>
+              <rect x="2" y="15" width="7" height="7" rx="1" fill="#000"/>
+              <path d="M15 15h2v2h-2zM19 15h2v2h-2zM15 19h2v2h-2zM19 19h2v2h-2zM6 6h.01M18 6h.01M6 18h.01M10 2v20M10 10h4M14 6v8M14 18v4" stroke-linecap="round"/>
+            </svg>
+            <div style="font-size: 1.15rem; font-weight: 800; margin-top: 0.6rem;">掃描即刻體驗</div>
+          </div>
+          <div style="margin-top: 1rem; color: #94a3b8; font-size: 1.2rem; font-weight: 600;">支援手機瀏覽器開啟</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 8: 檔案昇華 — 失敗的價值 -->
+    <div class="slide" data-notes="【演講時間：90-105分】分享高階思維：自主學習檔案的亮點往往不在於看似完美的結果，而是在於遭遇困難時所展現出的問題解決能力與反思深度。">
+      <div class="tag purple">💎 學習歷程精進</div>
+      <h2 class="section-title">把「探索挫折」轉化為「高品質反思」</h2>
+      <p class="subtitle">高中自主學習並非要求做出頂尖科技發明，評審教授更重視你的<strong>問題解決思維與學習韌性</strong>：</p>
+      
+      <div class="grid-2">
+        <div class="card">
+          <h3>平庸檔案的描述方式</h3>
+          <p>
+            「我們原本想要用 Python 製作手遊機率模擬器，但因為程式語法太困難寫不出來，所以最後改為上網搜尋別人的分析資料做成簡報。」<br><br>
+            <span style="color: #f87171;">❌ 盲點：面臨瓶頸直接放棄，缺乏探討問題與調適策略。</span>
+          </p>
+        </div>
+
+        <div class="card success">
+          <h3>展現優秀素養的高品質描述</h3>
+          <p>
+            「在第 8 週實作模擬器時，遇到演算法過度簡化導致抽卡保底機制失準的問題。透過與 AI 對話拆解邏輯，我發現是忽略了非獨立隨機事件的權重分配。雖然受限於高中數學範疇未能完全重構演算法，但這段除錯過程讓我深入理解了商業機制的底層設計，並在反思中提出了 2 種簡化假設的替代驗證方案。」<br><br>
+            <span style="color: #34d399;">✨ 亮點：展現出色的探究精神、工程除錯思維與自我調適反思能力！</span>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 9: 結尾行動方針 -->
+    <div class="slide" data-notes="【演講時間：105-120分】總結激勵。提醒學生高中時期的自主學習是難得的自我探索機會，鼓勵學生善用 AI 成為自主學習的舵手。">
+      <div class="tag hot">🚀 課後實踐清單</div>
+      <h1 class="hero-title" style="font-size: 3.2rem;">
+        探索你的熱情所在，<br>
+        定義專屬於你的<span class="gradient-text-hot">學習歷程</span>。
+      </h1>
+      <p class="subtitle">
+        自主學習是高中階段最具彈性的自我探索舞台。<br>
+        <strong>今天演講結束後，你可以嘗試這 3 個具體行動：</strong>
+      </p>
+      
+      <div class="grid-3" style="margin-top: 2rem;">
+        <div class="card">
+          <div class="icon">1️⃣</div>
+          <h3>寫下 3 個熱衷的課外主題</h3>
+          <p>誠實盤點課餘時間最吸引你的話題或興趣。</p>
+        </div>
+        <div class="card">
+          <div class="icon">2️⃣</div>
+          <h3>以專業教練角度與 AI 對話</h3>
+          <p>運用引導式提問，請 AI 協助你發掘主題背後的跨學科關聯。</p>
+        </div>
+        <div class="card">
+          <div class="icon">3️⃣</div>
+          <h3>擬定 18 週首個實作原型 (MVP)</h3>
+          <p>設定一個規模合宜、能落實產出具體成果的學習目標！</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Bottom Control Bar -->
+  <footer id="controls">
+    <div style="display: flex; align-items: center; gap: 1rem;">
+      <span style="font-weight: 800; font-size: 1rem; color: #fff; letter-spacing: 0.05em;">AI ✕ 自主學習探索</span>
+      <span style="color: var(--text-muted); font-size: 0.85rem;">|</span>
+      <span id="slideCounter" style="font-family: 'JetBrains Mono', monospace; font-size: 0.95rem; color: var(--accent-cyan);">01 / 09</span>
+    </div>
+
+    <div style="display: flex; align-items: center; gap: 0.75rem;">
+      <button class="btn" id="notesBtn" onclick="toggleNotes()">📝 講師小抄 (N)</button>
+      <button class="btn" onclick="prevSlide()">◀ 上一頁</button>
+      <button class="btn primary" onclick="nextSlide()">下一頁 ▶</button>
+      <button class="btn" onclick="toggleFullscreen()">⛶ 全螢幕 (F)</button>
+    </div>
+  </footer>
+
+  <!-- Speaker Notes Modal -->
+  <div id="notesModal">
+    <h4>
+      <span>🎙️ 講師講稿與時間提醒</span>
+      <span style="cursor: pointer;" onclick="toggleNotes()">✕</span>
+    </h4>
+    <div id="notesContent" style="margin-top: 0.5rem;"></div>
+  </div>
+
+  <script>
+    const slides = document.querySelectorAll('.slide');
+    const progressBar = document.getElementById('progressBar');
+    const slideCounter = document.getElementById('slideCounter');
+    const notesContent = document.getElementById('notesContent');
+    const notesModal = document.getElementById('notesModal');
+    let currentIdx = 0;
+
+    const topicsData = {
+      gacha: {
+        title: "🎰 題目提案：《手遊課金經濟學：抽卡保底機制與蒙地卡羅模擬》",
+        desc: "<strong>跨界學科：</strong> 數學機率統計 ✕ 行為經濟學 ✕ Python 模擬<br><strong>專案成果：</strong> 自己用 Python 或 Excel 寫一個抽卡模擬器，統計玩家要抽滿一隻角色平均要花幾抽，並探討廠商如何利用「沉沒成本效應」讓玩家停不下來。<br><strong>教授驚豔點：</strong> 滿滿的數據分析與圖表，證明你具備資料科學與統計敏銳度！"
+      },
+      idol: {
+        title: "💃 題目提案：《當迷妹也能做傳播學：K-Pop 粉絲應援的社群裂變演算法》",
+        desc: "<strong>跨界學科：</strong> 大眾傳播學 ✕ 演算法社群行銷 ✕ 數據爬蟲<br><strong>專案成果：</strong> 追蹤 Twitter (X) 或 Threads 上一次回歸活動的 Tag 擴散路徑，分析粉絲團體如何透過分工、控評、刷榜操縱推薦演算法，產出一份社群動態分析報告。<br><strong>教授驚豔點：</strong> 展現對當代網路文化與資訊傳播邏輯的超齡洞察力！"
+      },
+      meme: {
+        title: "🐸 題目提案：《迷因作為文化基因：迷因梗圖在青年社群的生命週期分析》",
+        desc: "<strong>跨界學科：</strong> 社會學 ✕ 語言學 ✕ 視覺符號學<br><strong>專案成果：</strong> 蒐集過去半年爆紅的 5 個台灣現象級迷因（例如：山道猴子、科目三），分析其文字語法、改作模式與衰亡週期，製作一份互動式迷因地圖網頁。<br><strong>教授驚豔點：</strong> 幽默卻具備社會人文學科的質性分析能力，完全不落俗套。"
+      },
+      sleep: {
+        title: "🛌 題目提案：《好眠救星：高中生晝夜節律與白噪音頻譜之睡眠品質影響研究》",
+        desc: "<strong>跨界學科：</strong> 生物神經學 ✕ 聲學物理 ✕ 自我實驗設計<br><strong>專案成果：</strong> 利用智慧手環記錄連續 4 週分別聆聽不同頻率白噪音（粉紅噪音、布朗噪音）時的深層睡眠比例，並用統計圖表視覺化展示自變數與應變數關係。<br><strong>教授驚豔點：</strong> 具備正統自然科學實驗設計與嚴謹數據驗證素養！"
+      }
+    };
+
+    function updateDeck() {
+      slides.forEach((s, idx) => {
+        s.classList.toggle('active', idx === currentIdx);
+      });
+      const progress = ((currentIdx + 1) / slides.length) * 100;
+      progressBar.style.width = progress + '%';
+      slideCounter.innerText = String(currentIdx + 1).padStart(2, '0') + ' / ' + String(slides.length).padStart(2, '0');
+      
+      const activeSlide = slides[currentIdx];
+      notesContent.innerHTML = activeSlide.dataset.notes || '本頁無特定備忘。';
+    }
+
+    function nextSlide() {
+      if (currentIdx < slides.length - 1) {
+        currentIdx++;
+        updateDeck();
+      }
+    }
+
+    function prevSlide() {
+      if (currentIdx > 0) {
+        currentIdx--;
+        updateDeck();
+      }
+    }
+
+    function toggleNotes() {
+      notesModal.classList.toggle('show');
+    }
+
+    function toggleFullscreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(() => {});
+      } else {
+        document.exitFullscreen();
+      }
+    }
+
+    function switchTopic(key) {
+      document.querySelectorAll('.chip-btn').forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+      const data = topicsData[key];
+      document.getElementById('topicOutput').innerHTML = `
+        <div style="font-weight: 800; font-size: 1.55rem; margin-bottom: 0.75rem; color: var(--accent-cyan);">${data.title}</div>
+        <div style="color: #e2e8f0; font-size: 1.3rem; line-height: 1.8;">${data.desc}</div>
+      `;
+    }
+
+    // Keyboard navigation
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+        e.preventDefault();
+        nextSlide();
+      } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+        e.preventDefault();
+        prevSlide();
+      } else if (e.key === 'f' || e.key === 'F') {
+        toggleFullscreen();
+      } else if (e.key === 'n' || e.key === 'N') {
+        toggleNotes();
+      }
+    });
+
+    // Init
+    switchTopic('gacha');
+    updateDeck();
+  </script>
+</body>
+</html>
