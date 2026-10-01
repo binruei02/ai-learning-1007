@@ -852,41 +852,6 @@
     <div id="notesContent" style="margin-top: 0.5rem;"></div>
   </div>
 
-  <script>
-    const slides = document.querySelectorAll('.slide');
-    const progressBar = document.getElementById('progressBar');
-    const slideCounter = document.getElementById('slideCounter');
-    const notesContent = document.getElementById('notesContent');
-    const notesModal = document.getElementById('notesModal');
-    let currentIdx = 0;
-
-    const topicsData = {
-      gacha: {
-        title: "🎰 題目提案：《手遊課金經濟學：抽卡保底機制與蒙地卡羅模擬》",
-        desc: "<strong>跨界學科：</strong> 數學機率統計 ✕ 行為經濟學 ✕ Python 模擬<br><strong>專案成果：</strong> 自己用 Python 或 Excel 寫一個抽卡模擬器，統計玩家要抽滿一隻角色平均要花幾抽，並探討廠商如何利用「沉沒成本效應」讓玩家停不下來。<br><strong>教授驚豔點：</strong> 滿滿的數據分析與圖表，證明你具備資料科學與統計敏銳度！"
-      },
-      idol: {
-        title: "💃 題目提案：《當迷妹也能做傳播學：K-Pop 粉絲應援的社群裂變演算法》",
-        desc: "<strong>跨界學科：</strong> 大眾傳播學 ✕ 演算法社群行銷 ✕ 數據爬蟲<br><strong>專案成果：</strong> 追蹤 Twitter (X) 或 Threads 上一次回歸活動的 Tag 擴散路徑，分析粉絲團體如何透過分工、控評、刷榜操縱推薦演算法，產出一份社群動態分析報告。<br><strong>教授驚豔點：</strong> 展現對當代網路文化與資訊傳播邏輯的超齡洞察力！"
-      },
-      meme: {
-        title: "🐸 題目提案：《迷因作為文化基因：迷因梗圖在青年社群的生命週期分析》",
-        desc: "<strong>跨界學科：</strong> 社會學 ✕ 語言學 ✕ 視覺符號學<br><strong>專案成果：</strong> 蒐集過去半年爆紅的 5 個台灣現象級迷因（例如：山道猴子、科目三），分析其文字語法、改作模式與衰亡週期，製作一份互動式迷因地圖網頁。<br><strong>教授驚豔點：</strong> 幽默卻具備社會人文學科的質性分析能力，完全不落俗套。"
-      },
-      sleep: {
-        title: "🛌 題目提案：《好眠救星：高中生晝夜節律與白噪音頻譜之睡眠品質影響研究》",
-        desc: "<strong>跨界學科：</strong> 生物神經學 ✕ 聲學物理 ✕ 自我實驗設計<br><strong>專案成果：</strong> 利用智慧手環記錄連續 4 週分別聆聽不同頻率白噪音（粉紅噪音、布朗噪音）時的深層睡眠比例，並用統計圖表視覺化展示自變數與應變數關係。<br><strong>教授驚豔點：</strong> 具備正統自然科學實驗設計與嚴謹數據驗證素養！"
-      }
-    };
-
-    function updateDeck() {
-      slides.forEach((s, idx) => {
-        s.classList.toggle('active', idx === currentIdx);
-      });
-      const progress = ((currentIdx + 1) / slides.length) * 100;
-      progressBar.style.width = progress + '%';
-      slideCounter.innerText = String(currentIdx + 1).padStart(2, '0') + ' / ' + String(slides.length).padStart(2, '0');
-      
   <!-- AI Coach Interactive Dialog Modal -->
   <div id="aiCoachModal" class="app-modal">
     <div class="modal-card">
@@ -937,7 +902,7 @@
           </ol>
         </div>
 
-        <div style="background: rgba(0,0,0,0.5); padding: 1.2rem; border-radius: 0.8rem; border: 1px solid rgba(255,255,255,0.1);">
+        <div style="background: rgba(0,0,0,0.5); padding: 1.2rem; border-radius: 0.8rem; border-1px solid rgba(255,255,255,0.1);">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
             <span style="font-size: 0.95rem; color: #94a3b8; font-weight: 700;">系統提示詞 (System Prompt)</span>
             <button class="btn primary" style="padding: 0.4rem 1rem; font-size: 0.95rem;" onclick="copyGemPrompt()">📋 複製提示詞</button>
