@@ -407,6 +407,159 @@
       width: 220px;
       height: 220px;
     }
+
+    /* Fullscreen Interactive Modal Styles */
+    .app-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(4, 7, 13, 0.88);
+      backdrop-filter: blur(16px);
+      z-index: 999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    .app-modal.active {
+      display: flex;
+    }
+
+    .modal-card {
+      background: #0d121f;
+      border: 1.5px solid rgba(0, 242, 254, 0.35);
+      border-radius: 1.5rem;
+      width: 100%;
+      max-width: 860px;
+      height: 82vh;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7);
+      overflow: hidden;
+      animation: modalPop 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes modalPop {
+      from { transform: scale(0.92) translateY(20px); opacity: 0; }
+      to { transform: scale(1) translateY(0); opacity: 1; }
+    }
+
+    .modal-header {
+      padding: 1.25rem 1.8rem;
+      background: rgba(18, 24, 38, 0.95);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .modal-body {
+      flex: 1;
+      padding: 1.5rem;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .modal-footer {
+      padding: 1rem 1.5rem;
+      background: rgba(15, 20, 32, 0.95);
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      gap: 0.8rem;
+      align-items: center;
+    }
+
+    .chat-bubble {
+      display: flex;
+      gap: 1rem;
+      max-width: 88%;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .chat-bubble.assistant {
+      align-self: flex-start;
+    }
+
+    .chat-bubble.user {
+      align-self: flex-end;
+      flex-direction: row-reverse;
+    }
+
+    .chat-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      flex-shrink: 0;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .chat-content {
+      padding: 1.1rem 1.4rem;
+      border-radius: 1.2rem;
+      font-size: 1.15rem;
+      line-height: 1.65;
+      user-select: text;
+    }
+
+    .chat-bubble.assistant .chat-content {
+      background: rgba(22, 30, 48, 0.95);
+      border: 1px solid rgba(0, 242, 254, 0.25);
+      color: #e2e8f0;
+      border-top-left-radius: 0.2rem;
+    }
+
+    .chat-bubble.user .chat-content {
+      background: linear-gradient(135deg, #0284c7 0%, #6366f1 100%);
+      color: #fff;
+      border-top-right-radius: 0.2rem;
+    }
+
+    .quick-topic-pill {
+      background: rgba(0, 242, 254, 0.1);
+      border: 1px solid rgba(0, 242, 254, 0.3);
+      color: #38bdf8;
+      padding: 0.45rem 1rem;
+      border-radius: 999px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .quick-topic-pill:hover {
+      background: var(--accent-cyan);
+      color: #000;
+      border-color: var(--accent-cyan);
+    }
+
+    .chat-input {
+      flex: 1;
+      background: rgba(5, 8, 14, 0.8);
+      border: 1.5px solid rgba(255, 255, 255, 0.15);
+      border-radius: 0.8rem;
+      padding: 0.85rem 1.2rem;
+      color: #fff;
+      font-size: 1.15rem;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .chat-input:focus {
+      border-color: var(--accent-cyan);
+    }
   </style>
 </head>
 <body>
@@ -570,37 +723,48 @@
     </div>
 
     <!-- Slide 7: 現場掃碼實測 -->
-    <div class="slide" data-notes="【演講時間：70-90分】邀請全體同學拿出手機掃描 QR Code，進行 5-8 分鐘的互動對話實測，親身體驗由 AI 教練引導出個人專案草案的過程。">
-      <div class="tag hot">📱 全場連線實測</div>
+    <div class="slide" data-notes="【演講時間：70-90分】高潮互動環節！邀請全場掏出手機掃描 QR Code，或是由講師直接點擊下方「啟動現場 AI 教練」，當場請台下同學丟一個興趣，即時演示教練如何三輪問答產出完整的 18 週專案計畫書！">
+      <div class="tag hot">📱 全場連線實測 ✕ AI 教練</div>
       <h2 class="section-title">立即體驗：你的專屬「自主學習引導教練」</h2>
       <div class="grid-2" style="align-items: center;">
         <div>
           <p class="subtitle">
-            無需安裝任何軟體，手機掃描 QR Code 即可啟動對話：<br><br>
+            無需註冊帳號、不用安裝 App，手機掃描或點擊下方按鈕即可啟動引導：<br><br>
             1. 告訴教練：「我平常課餘時間最投入的一件事」<br>
             2. 回答教練拋給你的 2 個關鍵思考問題<br>
             3. 在 3 分鐘內，教練將協助你梳理出 18 週專案計畫架構！
           </p>
-          <div style="margin-top: 2rem;">
-            <span class="tag">💡 互動挑戰</span>
-            <p style="color: #38bdf8; font-size: 1.35rem; font-weight: 700; line-height: 1.6;">
-              「邀請 1~2 位同學分享剛梳理出的特色主題，我們現場共同探討能如何深化！」
+
+          <div style="display: flex; gap: 1rem; margin-top: 1.5rem; flex-wrap: wrap;">
+            <button class="btn primary" style="font-size: 1.25rem; padding: 0.8rem 1.8rem;" onclick="openAiCoachModal()">
+              🤖 現場啟動 AI 引導教練
+            </button>
+            <button class="btn" style="font-size: 1.15rem;" onclick="openGeminiGuide()">
+              ✨ 前往 Google Gemini 建立 Gem
+            </button>
+          </div>
+
+          <div style="margin-top: 1.5rem;">
+            <span class="tag">💡 現場挑戰</span>
+            <p style="color: #38bdf8; font-size: 1.25rem; font-weight: 700; line-height: 1.6;">
+              「掃碼後輸入你最喜歡的課外愛好，看看 AI 教練為你量身打造的專案主題！」
             </p>
           </div>
         </div>
 
         <div style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
-          <div class="qr-box" style="width: 260px; height: 260px;">
-            <!-- 模擬 QR Code -->
-            <svg width="210" height="210" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="1.8">
-              <rect x="2" y="2" width="7" height="7" rx="1" fill="#000"/>
-              <rect x="15" y="2" width="7" height="7" rx="1" fill="#000"/>
-              <rect x="2" y="15" width="7" height="7" rx="1" fill="#000"/>
-              <path d="M15 15h2v2h-2zM19 15h2v2h-2zM15 19h2v2h-2zM19 19h2v2h-2zM6 6h.01M18 6h.01M6 18h.01M10 2v20M10 10h4M14 6v8M14 18v4" stroke-linecap="round"/>
-            </svg>
-            <div style="font-size: 1.15rem; font-weight: 800; margin-top: 0.6rem;">掃描即刻體驗</div>
+          <div class="qr-box" style="width: 270px; height: 270px; padding: 1.2rem; box-shadow: 0 10px 30px rgba(0,242,254,0.3);">
+            <!-- 真實可掃描的 QR Code，指向線上 GitHub Pages -->
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=240x240&data=https://binruei02.github.io/ai-learning-1007/" 
+                 alt="Scan to open AI Coach Presentation" 
+                 style="width: 100%; height: 100%; border-radius: 0.5rem; object-fit: contain;">
           </div>
-          <div style="margin-top: 1rem; color: #94a3b8; font-size: 1.2rem; font-weight: 600;">支援手機瀏覽器開啟</div>
+          <div style="margin-top: 1rem; color: var(--accent-cyan); font-size: 1.2rem; font-weight: 800;">
+            📲 手機相機掃描立即開啟
+          </div>
+          <div style="color: #94a3b8; font-size: 1rem; margin-top: 0.25rem;">
+            https://binruei02.github.io/ai-learning-1007
+          </div>
         </div>
       </div>
     </div>
@@ -723,6 +887,116 @@
       progressBar.style.width = progress + '%';
       slideCounter.innerText = String(currentIdx + 1).padStart(2, '0') + ' / ' + String(slides.length).padStart(2, '0');
       
+  <!-- AI Coach Interactive Dialog Modal -->
+  <div id="aiCoachModal" class="app-modal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div style="display: flex; align-items: center; gap: 0.8rem;">
+          <div class="chat-avatar" style="background: rgba(0, 242, 254, 0.15); border-color: var(--accent-cyan); color: var(--accent-cyan);">🤖</div>
+          <div>
+            <div style="font-weight: 800; font-size: 1.25rem; color: #fff;">高中自主學習破冰教練 (Coach Horizon)</div>
+            <div style="color: #10b981; font-size: 0.9rem; font-weight: 600;">● 蘇格拉底式即時引導中</div>
+          </div>
+        </div>
+        <button class="btn" onclick="closeAiCoachModal()" style="padding: 0.4rem 0.9rem; font-size: 1.1rem;">✕ 關閉</button>
+      </div>
+
+      <div id="chatMessages" class="modal-body">
+        <!-- Messages will be injected here -->
+      </div>
+
+      <div style="padding: 0.6rem 1.5rem; background: rgba(10, 15, 25, 0.95); border-top: 1px solid rgba(255, 255, 255, 0.05); display: flex; gap: 0.6rem; flex-wrap: wrap;">
+        <span style="color: #94a3b8; font-size: 0.9rem; line-height: 2;">快捷測試：</span>
+        <button class="quick-topic-pill" onclick="sendQuickTopic('我很喜歡玩原神和手遊抽卡')">🎮 手遊抽卡/原神</button>
+        <button class="quick-topic-pill" onclick="sendQuickTopic('我放假都在追韓團 K-Pop 買周邊跑應援')">💃 韓團追星/應援</button>
+        <button class="quick-topic-pill" onclick="sendQuickTopic('我超愛看動漫，特別是熱血運動番')">🎬 動漫與敘事</button>
+        <button class="quick-topic-pill" onclick="sendQuickTopic('平常喜歡打籃球看 NBA 戰術分析')">🏀 籃球/運動分析</button>
+      </div>
+
+      <div class="modal-footer">
+        <input type="text" id="coachInput" class="chat-input" placeholder="輸入你課餘最常做的事（例如：打電動、看小說、烘焙...）" onkeydown="if(event.key==='Enter') sendUserMessage()" />
+        <button class="btn primary" onclick="sendUserMessage()">發送 ↵</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Gemini Gem Setup Guide Modal -->
+  <div id="geminiGuideModal" class="app-modal">
+    <div class="modal-card" style="max-width: 760px; height: auto; max-height: 85vh;">
+      <div class="modal-header">
+        <div style="font-weight: 800; font-size: 1.3rem; color: #fff;">✨ 建立你的 Google Gemini 官方 Gem</div>
+        <button class="btn" onclick="closeGeminiGuide()" style="padding: 0.4rem 0.9rem;">✕ 關閉</button>
+      </div>
+      <div class="modal-body" style="gap: 1.5rem; color: #cbd5e1; font-size: 1.15rem; line-height: 1.7;">
+        <div>
+          <strong style="color: var(--accent-cyan); font-size: 1.25rem;">3 步驟將「自主學習教練」存入你的 Google Gemini：</strong>
+          <ol style="margin-left: 1.5rem; margin-top: 0.8rem; display: flex; flex-direction: column; gap: 0.6rem;">
+            <li>開啟 Google Gemini 官網（需登入 Google 帳號）。</li>
+            <li>點擊左下角「Gems 管理工具」$\rightarrow$「建立新 Gem」。</li>
+            <li>將下方 System Prompt 完整貼入「Instructions（操作說明）」，名稱取為「自主學習領航教練」即可！</li>
+          </ol>
+        </div>
+
+        <div style="background: rgba(0,0,0,0.5); padding: 1.2rem; border-radius: 0.8rem; border: 1px solid rgba(255,255,255,0.1);">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+            <span style="font-size: 0.95rem; color: #94a3b8; font-weight: 700;">系統提示詞 (System Prompt)</span>
+            <button class="btn primary" style="padding: 0.4rem 1rem; font-size: 0.95rem;" onclick="copyGemPrompt()">📋 複製提示詞</button>
+          </div>
+          <div id="gemPromptText" style="max-height: 200px; overflow-y: auto; font-family: monospace; font-size: 0.9rem; color: #38bdf8; white-space: pre-wrap;"># Role: 高中自主學習領航教練 (Coach Horizon)
+
+## Context
+你是一位專精台灣「108課綱高中自主學習」的引導式教練。你的任務不是直接幫學生寫作業，而是透過蘇格拉底式的多輪對話，引導學生從「個人真實興趣」出發，收斂出兼具熱情與可行性的自主學習題目，並產出合規且吸睛的自主學習計畫書。
+
+## Guidelines
+1. 嚴禁一次性說教或傾倒長篇大論：每次回覆最多問 1~2 個核心問題，維持對話互動。
+2. 禁止否定任何興趣：無論學生說動漫、打電動、美妝、追星、耍廢，都要接納，並引導找出背後的「知識機制（心理、科技、社會、設計、經濟）」。
+3. 語氣風格：像幽默、有見識的大學學長姊，口語、繁體中文，引導學生思考。</div>
+        </div>
+
+        <div style="display: flex; gap: 1rem; justify-content: flex-end;">
+          <a href="https://gemini.google.com/app" target="_blank" class="btn primary" style="font-size: 1.1rem; text-decoration: none;">
+            🚀 前往 Google Gemini 官網 ↗
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const slides = document.querySelectorAll('.slide');
+    const progressBar = document.getElementById('progressBar');
+    const slideCounter = document.getElementById('slideCounter');
+    const notesContent = document.getElementById('notesContent');
+    const notesModal = document.getElementById('notesModal');
+    let currentIdx = 0;
+
+    const topicsData = {
+      gacha: {
+        title: "🎰 題目提案：《手遊課金經濟學：抽卡保底機制與蒙地卡羅模擬》",
+        desc: "<strong>跨界學科：</strong> 數學機率統計 ✕ 行為經濟學 ✕ Python 模擬<br><strong>專案成果：</strong> 自己用 Python 或 Excel 寫一個抽卡模擬器，統計玩家要抽滿一隻角色平均要花幾抽，並探討廠商如何利用「沉沒成本效應」讓玩家停不下來。<br><strong>教授驚豔點：</strong> 滿滿的數據分析與圖表，證明你具備資料科學與統計敏銳度！"
+      },
+      idol: {
+        title: "💃 題目提案：《當迷妹也能做傳播學：K-Pop 粉絲應援的社群裂變演算法》",
+        desc: "<strong>跨界學科：</strong> 大眾傳播學 ✕ 演算法社群行銷 ✕ 數據爬蟲<br><strong>專案成果：</strong> 追蹤 Twitter (X) 或 Threads 上一次回歸活動的 Tag 擴散路徑，分析粉絲團體如何透過分工、控評、刷榜操縱推薦演算法，產出一份社群動態分析報告。<br><strong>教授驚豔點：</strong> 展現對當代網路文化與資訊傳播邏輯的超齡洞察力！"
+      },
+      meme: {
+        title: "🐸 題目提案：《迷因作為文化基因：迷因梗圖在青年社群的生命週期分析》",
+        desc: "<strong>跨界學科：</strong> 社會學 ✕ 語言學 ✕ 視覺符號學<br><strong>專案成果：</strong> 蒐集過去半年爆紅的 5 個台灣現象級迷因（例如：山道猴子、科目三），分析其文字語法、改作模式與衰亡週期，製作一份互動式迷因地圖網頁。<br><strong>教授驚豔點：</strong> 幽默卻具備社會人文學科的質性分析能力，完全不落俗套。"
+      },
+      sleep: {
+        title: "🛌 題目提案：《好眠救星：高中生晝夜節律與白噪音頻譜之睡眠品質影響研究》",
+        desc: "<strong>跨界學科：</strong> 生物神經學 ✕ 聲學物理 ✕ 自我實驗設計<br><strong>專案成果：</strong> 利用智慧手環記錄連續 4 週分別聆聽不同頻率白噪音（粉紅噪音、布朗噪音）時的深層睡眠比例，並用統計圖表視覺化展示自變數與應變數關係。<br><strong>教授驚豔點：</strong> 具備正統自然科學實驗設計與嚴謹數據驗證素養！"
+      }
+    };
+
+    function updateDeck() {
+      slides.forEach((s, idx) => {
+        s.classList.toggle('active', idx === currentIdx);
+      });
+      const progress = ((currentIdx + 1) / slides.length) * 100;
+      progressBar.style.width = progress + '%';
+      slideCounter.innerText = String(currentIdx + 1).padStart(2, '0') + ' / ' + String(slides.length).padStart(2, '0');
+      
       const activeSlide = slides[currentIdx];
       notesContent.innerHTML = activeSlide.dataset.notes || '本頁無特定備忘。';
     }
@@ -763,8 +1037,158 @@
       `;
     }
 
+    // Modal Control Functions
+    function openAiCoachModal() {
+      document.getElementById('aiCoachModal').classList.add('active');
+      if (document.getElementById('chatMessages').children.length === 0) {
+        initCoachChat();
+      }
+    }
+
+    function closeAiCoachModal() {
+      document.getElementById('aiCoachModal').classList.remove('active');
+    }
+
+    function openGeminiGuide() {
+      document.getElementById('geminiGuideModal').classList.add('active');
+    }
+
+    function closeGeminiGuide() {
+      document.getElementById('geminiGuideModal').classList.remove('active');
+    }
+
+    function copyGemPrompt() {
+      const text = document.getElementById('gemPromptText').innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        alert('✅ 已複製 System Prompt！可直接貼入 Google Gemini 的 Gem Instructions。');
+      });
+    }
+
+    // AI Coach Chat Engine
+    const chatMessages = document.getElementById('chatMessages');
+    const coachInput = document.getElementById('coachInput');
+
+    function initCoachChat() {
+      appendBotMessage(`
+        👋 嗨！我是你的自主學習領航教練。<br><br>
+        在 108 課綱裡，自主學習不是要你當做加開一門考科，而是讓你能名正言順花時間研究你<strong>「真正有熱忱」</strong>的事。<br><br>
+        老實告訴我：平常課餘、放假沒人管你時，你最常花時間在什麼事情上面？<br>
+        <em>（打電動、追星、滑社群、看動漫、打球、甚至研究穿搭都可以，隨便說！）</em>
+      `);
+    }
+
+    function appendBotMessage(html) {
+      const bubble = document.createElement('div');
+      bubble.className = 'chat-bubble assistant';
+      bubble.innerHTML = `
+        <div class="chat-avatar" style="color: var(--accent-cyan);">🤖</div>
+        <div class="chat-content">${html}</div>
+      `;
+      chatMessages.appendChild(bubble);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    function appendUserMessage(text) {
+      const bubble = document.createElement('div');
+      bubble.className = 'chat-bubble user';
+      bubble.innerHTML = `
+        <div class="chat-avatar">🧑‍🎓</div>
+        <div class="chat-content">${text}</div>
+      `;
+      chatMessages.appendChild(bubble);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    function sendQuickTopic(text) {
+      coachInput.value = text;
+      sendUserMessage();
+    }
+
+    let chatStep = 0;
+    let userInterest = '';
+
+    function sendUserMessage() {
+      const text = coachInput.value.trim();
+      if (!text) return;
+      appendUserMessage(text);
+      coachInput.value = '';
+
+      if (chatStep === 0) {
+        userInterest = text;
+        chatStep = 1;
+        // Simulate thoughtful coaching
+        appendBotMessage(`
+          🔍 <strong>太棒的興趣了！</strong> 很多人以為「${userInterest}」只是休閒娛樂，但只要套上跨學科視角，背後其實藏著深刻的專業機制：<br><br>
+          💡 <strong>潛在跨領域學科透鏡：</strong><br>
+          1. <strong>【資訊與數學】</strong>：背後的數值演算法、機率分佈或系統架構<br>
+          2. <strong>【心理與社會】</strong>：受眾情緒沉浸、社群互動機制與行為經濟學<br>
+          3. <strong>【商業與行銷】</strong>：IP 品牌經營、傳播擴散與用戶黏著度分析<br><br>
+          我想向你請教一個核心問題：<strong>在體驗「${userInterest}」的過程中，最讓你感到著迷或好奇的具體細節是什麼？</strong><br>
+          <em>（例如：數值平衡？美術視覺？故事情節？還是跟朋友互動的過程？）</em>
+        `);
+      } else if (chatStep === 1) {
+        chatStep = 2;
+        appendBotMessage(`
+          🎯 <strong>捕捉到你的核心動機了！</strong> 這正是最珍貴的原創研究視角。<br><br>
+          根據你的想法，我為你量身提煉出兩個 108 課綱自主學習題目：<br><br>
+          <strong>方案 A（偏實作與分析）：</strong><br>
+          《${userInterest}之數值模擬與用戶行為探究》<br>
+          • 預期成果：一份數據視覺化試算表 ＋ 8 頁專案研究小論文。<br><br>
+          <strong>方案 B（偏人文與專案）：</strong><br>
+          《從日常熱忱到專業實踐：${userInterest}之社群傳播與文化現象解析》<br>
+          • 預期成果：製作一個主題分析成果網站或 Podcast 專題節目。<br><br>
+          👇 <strong>點擊下方按鈕，直接為你生成 18 週完整自主學習計畫表！</strong><br><br>
+          <button class="btn primary" onclick="generateFullPlan('${userInterest}')" style="font-size: 1.15rem; padding: 0.6rem 1.4rem;">
+            📑 產生標準 18 週自主學習計畫書
+          </button>
+        `);
+      } else {
+        appendBotMessage(`
+          你可以隨時點擊上方的按鈕產生計畫書，或是輸入新的愛好重新探索！如果想要更長、更深度的討論，也非常推薦使用「前往 Google Gemini 建立 Gem」將教練存入你的手機隨時對話喔！
+        `);
+      }
+    }
+
+    function generateFullPlan(topic) {
+      appendBotMessage(`
+        🎉 <strong>為你生成的標準「108 課綱自主學習計畫表」已完成！</strong><br><br>
+        <div style="background: rgba(0,0,0,0.4); padding: 1.2rem; border-radius: 0.8rem; border-left: 4px solid var(--accent-cyan); font-size: 1.05rem; line-height: 1.7;">
+          <strong>【專案名稱】</strong> 解構日常熱忱：${topic}之跨領域探究與實作專案<br>
+          <strong>【核心素養】</strong> 系統思考與問題解決 (A2)、符號運用與溝通表達 (B1)<br>
+          <strong>【申請動機】</strong> 結合個人課外深度參與經驗，透過科學分析與學科視角，探討其背後之核心機制。<br>
+          <strong>【預期成果】</strong> 完成一份包含背景分析、原型實作數據與深度反思之自主學習檔案。<br><br>
+          <strong>【18 週執行進度規劃 (6-6-6 模組)】</strong><br>
+          • <strong>第 1-6 週（知識奠基）：</strong> 梳理相關文獻與專業概念，完成心智圖與 800 字現狀調研。<br>
+          • <strong>第 7-12 週（原型實作）：</strong> 動手產出第一版分析模型/設計作品，記錄除錯與遭遇問題歷程。<br>
+          • <strong>第 13-18 週（成果整合）：</strong> 進行成果排版與反思撰寫，總結遭遇困難時的應對策略與未來展望。<br><br>
+          <strong>【評量指標】</strong> 是否如期產出原型、是否具備面對問題時的解決紀錄、反思深度。
+        </div><br>
+        <button class="btn primary" onclick="copyPlanToClipboard('${topic}')">📋 一鍵複製計畫書文字</button>
+      `);
+    }
+
+    function copyPlanToClipboard(topic) {
+      const text = `【專案名稱】解構日常熱忱：${topic}之跨領域探究與實作專案
+【核心素養】系統思考與問題解決 (A2)、符號運用與溝通表達 (B1)
+【申請動機】結合個人課外深度參與經驗，透過科學分析與學科視角，探討其背後之核心機制。
+【預期成果】完成一份包含背景分析、原型實作數據與深度反思之自主學習檔案。
+
+【18 週執行進度規劃】
+第 1-6 週（知識奠基）：梳理相關文獻與專業概念，完成心智圖與 800 字現狀調研。
+第 7-12 週（原型實作）：動手產出第一版分析模型/設計作品，記錄除錯與遭遇問題歷程。
+第 13-18 週（成果整合）：進行成果排版與反思撰寫，總結遭遇困難時的應對策略與未來展望。
+
+【自主檢核與反思】記錄每階段瓶頸與調適過程，展現敏捷迭代思維。`;
+      navigator.clipboard.writeText(text).then(() => {
+        alert('✅ 計畫書文字已成功複製到剪貼簿！可直接貼入你的自主學習申請文件。');
+      });
+    }
+
     // Keyboard navigation
     window.addEventListener('keydown', (e) => {
+      // Don't intercept typing when typing in coach input
+      if (document.activeElement === coachInput) return;
+
       if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
         e.preventDefault();
         nextSlide();
@@ -775,6 +1199,9 @@
         toggleFullscreen();
       } else if (e.key === 'n' || e.key === 'N') {
         toggleNotes();
+      } else if (e.key === 'Escape') {
+        closeAiCoachModal();
+        closeGeminiGuide();
       }
     });
 
