@@ -736,12 +736,15 @@
             3. 在 3 分鐘內，教練將協助你梳理出 18 週專案計畫架構！
           </p>
 
-          <div style="display: flex; gap: 1rem; margin-top: 1.5rem; flex-wrap: wrap;">
-            <button class="btn primary" style="font-size: 1.25rem; padding: 0.8rem 1.8rem;" onclick="openAiCoachModal()">
-              🤖 現場啟動 AI 引導教練
+          <div style="display: flex; gap: 1rem; margin-top: 1.5rem; flex-wrap: wrap; align-items: center;">
+            <button class="btn primary" style="font-size: 1.25rem; padding: 0.8rem 1.8rem;" onclick="launchGemCoach()">
+              🤖 現場啟動 AI 引導教練 (Gemini 官方 Gem) ↗
             </button>
             <button class="btn" style="font-size: 1.15rem;" onclick="openGeminiGuide()">
-              ✨ 前往 Google Gemini 建立 Gem
+              ✨ 查看 / 建立 Gem 提示詞
+            </button>
+            <button class="btn" style="font-size: 1.05rem; opacity: 0.8;" onclick="setGemUrl()">
+              ⚙️ 綁定你的 Gem 專屬連結
             </button>
           </div>
 
@@ -755,15 +758,15 @@
 
         <div style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
           <div class="qr-box" style="width: 270px; height: 270px; padding: 1.2rem; box-shadow: 0 10px 30px rgba(0,242,254,0.3);">
-            <!-- 真實可掃描的 QR Code，指向線上 GitHub Pages -->
-            <img src="https://api.qrserver.com/v1/create-qr-code/?size=240x240&data=https://binruei02.github.io/ai-learning-1007/" 
+            <!-- 真實可掃描的 QR Code -->
+            <img id="qrCodeImg" src="https://api.qrserver.com/v1/create-qr-code/?size=240x240&data=https://binruei02.github.io/ai-learning-1007/" 
                  alt="Scan to open AI Coach Presentation" 
                  style="width: 100%; height: 100%; border-radius: 0.5rem; object-fit: contain;">
           </div>
           <div style="margin-top: 1rem; color: var(--accent-cyan); font-size: 1.2rem; font-weight: 800;">
             📲 手機相機掃描立即開啟
           </div>
-          <div style="color: #94a3b8; font-size: 1rem; margin-top: 0.25rem;">
+          <div id="qrLabelText" style="color: #94a3b8; font-size: 0.92rem; margin-top: 0.25rem; word-break: break-all; max-width: 260px; text-align: center;">
             https://binruei02.github.io/ai-learning-1007
           </div>
         </div>
@@ -1035,12 +1038,37 @@
       `;
     }
 
+    // Gem Direct Launch & Link Binding
+    let customGemUrl = localStorage.getItem('CUSTOM_GEM_URL') || 'https://gemini.google.com/app';
+
+    function launchGemCoach() {
+      window.open(customGemUrl, '_blank');
+    }
+
+    function setGemUrl() {
+      const input = prompt('請貼上你在 Google Gemini 中建立好的專屬 Gem 分享連結（URL）：\n\n（設定後，現場點擊按鈕或學生掃碼都會直接打開你的 Gem）', customGemUrl);
+      if (input && input.trim()) {
+        customGemUrl = input.trim();
+        localStorage.setItem('CUSTOM_GEM_URL', customGemUrl);
+        updateGemQr();
+        alert('✅ 已成功綁定你的專屬 Gem 網址！\n現場點擊按鈕與手機掃碼都將直接進入你的官方 Gem。');
+      }
+    }
+
+    function updateGemQr() {
+      const qrImg = document.getElementById('qrCodeImg');
+      const qrLabel = document.getElementById('qrLabelText');
+      if (qrImg && customGemUrl) {
+        qrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=240x240&data=${encodeURIComponent(customGemUrl)}`;
+      }
+      if (qrLabel && customGemUrl) {
+        qrLabel.innerText = customGemUrl;
+      }
+    }
+
     // Modal Control Functions
     function openAiCoachModal() {
-      document.getElementById('aiCoachModal').classList.add('active');
-      if (document.getElementById('chatMessages').children.length === 0) {
-        initCoachChat();
-      }
+      launchGemCoach();
     }
 
     function closeAiCoachModal() {
@@ -1223,6 +1251,9 @@
     // Init
     switchTopic('gacha');
     updateDeck();
+    if (localStorage.getItem('CUSTOM_GEM_URL')) {
+      updateGemQr();
+    }
   </script>
 </body>
 </html>
