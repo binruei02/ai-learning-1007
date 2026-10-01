@@ -653,12 +653,16 @@
       <p class="subtitle">只要套上專業學科透鏡，任何日常休閒都能轉化為高水準的自主學習題目：</p>
       
       <div class="alchemist-box">
-        <div style="font-weight: 700; color: #94a3b8;">現場點擊測試：選擇一項你有興趣的課外領域</div>
+        <div style="font-weight: 700; color: #94a3b8; font-size: 1.15rem;">現場點擊測試：選擇一項你有興趣的課外領域（跨理科、商管、傳播、人文與體育）</div>
         <div class="quick-chips">
-          <button class="chip-btn active" onclick="switchTopic('gacha')">🎰 遊戲機制 / 數值運算</button>
-          <button class="chip-btn" onclick="switchTopic('idol')">💃 流行文化 / 社群傳播</button>
-          <button class="chip-btn" onclick="switchTopic('meme')">🐸 網路迷因 / 青年語言文化</button>
-          <button class="chip-btn" onclick="switchTopic('sleep')">🛌 生物時鐘 / 睡眠聲學實驗</button>
+          <button class="chip-btn active" onclick="switchTopic('gacha')">🎰 遊戲數值 / 抽卡機率</button>
+          <button class="chip-btn" onclick="switchTopic('idol')">💃 流行追星 / 粉絲應援</button>
+          <button class="chip-btn" onclick="switchTopic('meme')">🐸 網路迷因 / 青年語言</button>
+          <button class="chip-btn" onclick="switchTopic('drink')">🧋 手搖飲品 / 萃取與定價</button>
+          <button class="chip-btn" onclick="switchTopic('sports')">🏀 籃球排球 / 運動科學</button>
+          <button class="chip-btn" onclick="switchTopic('anime')">🎬 動漫影視 / 分鏡敘事</button>
+          <button class="chip-btn" onclick="switchTopic('fashion')">👟 球鞋穿搭 / 稀缺性溢價</button>
+          <button class="chip-btn" onclick="switchTopic('sleep')">🛌 睡眠放空 / 聲學實驗</button>
         </div>
 
         <div id="topicOutput" class="alchemist-result">
@@ -994,11 +998,27 @@
       },
       idol: {
         title: "💃 題目提案：《當迷妹也能做傳播學：K-Pop 粉絲應援的社群裂變演算法》",
-        desc: "<strong>跨界學科：</strong> 大眾傳播學 ✕ 演算法社群行銷 ✕ 數據爬蟲<br><strong>專案成果：</strong> 追蹤 Twitter (X) 或 Threads 上一次回歸活動的 Tag 擴散路徑，分析粉絲團體如何透過分工、控評、刷榜操縱推薦演算法，產出一份社群動態分析報告。<br><strong>教授驚豔點：</strong> 展現對當代網路文化與資訊傳播邏輯的超齡洞察力！"
+        desc: "<strong>跨界學科：</strong> 大眾傳播學 ✕ 演算法社群行銷 ✕ 數據爬蟲<br><strong>專案成果：</strong> 追蹤 X / Threads 上一次回歸活動的 Tag 擴散路徑，分析粉絲團體如何透過分工、控評、刷榜操縱推薦演算法，產出一份社群動態分析報告。<br><strong>教授驚豔點：</strong> 展現對當代網路文化與資訊傳播邏輯的超齡洞察力！"
       },
       meme: {
         title: "🐸 題目提案：《迷因作為文化基因：迷因梗圖在青年社群的生命週期分析》",
-        desc: "<strong>跨界學科：</strong> 社會學 ✕ 語言學 ✕ 視覺符號學<br><strong>專案成果：</strong> 蒐集過去半年爆紅的 5 個台灣現象級迷因（例如：山道猴子、科目三），分析其文字語法、改作模式與衰亡週期，製作一份互動式迷因地圖網頁。<br><strong>教授驚豔點：</strong> 幽默卻具備社會人文學科的質性分析能力，完全不落俗套。"
+        desc: "<strong>跨界學科：</strong> 社會學 ✕ 語言學 ✕ 視覺符號學<br><strong>專案成果：</strong> 蒐集過去一年爆紅的 5 個台灣現象級迷因（例如：山道猴子、科目三），分析其文字語法、改作模式與衰亡週期，製作一份互動式迷因地圖網頁。<br><strong>教授驚豔點：</strong> 幽默卻具備社會人文學科的質性分析能力，完全不落俗套。"
+      },
+      drink: {
+        title: "🧋 題目提案：《校門口的手搖飲經濟學：茶湯多酚萃取與定價心理學實證》",
+        desc: "<strong>跨界學科：</strong> 食品化學 ✕ 微觀經濟學 ✕ 消費者行為學<br><strong>專案成果：</strong> 透過溫控實驗測試綠茶茶多酚釋出率對口感苦澀度的影響，並針對高中生發放 200 份問卷，建立不同加料、甜度的「價格敏感度彈性模型」。<br><strong>教授驚豔點：</strong> 兼具嚴謹的理化控制變因實驗與商業市場調查實戰素養！"
+      },
+      sports: {
+        title: "🏀 題目提案：《三分球革命：從 NBA 與高中聯賽看期望值 (eFG%) 與防守空間幾何》",
+        desc: "<strong>跨界學科：</strong> 運動生物力學 ✕ 空間幾何 ✕ 運動統計學 (Sabermetrics)<br><strong>專案成果：</strong> 蒐集高中聯賽或 NBA 投籃數據，用試算表繪製投籃熱區圖，分析球員在中距離與三分線的真實投射期望值，並設計一份「小球時代防守輪轉策略指南」。<br><strong>教授驚豔點：</strong> 展現將體育熱忱轉化為高階空間統計與資料科學的分析能力！"
+      },
+      anime: {
+        title: "🎬 題目提案：《熱血的科學：動漫高潮場面分鏡節奏與視聽蒙太奇心理分析》",
+        desc: "<strong>跨界學科：</strong> 視聽藝術美學 ✕ 認知神經科學 ✕ 影視符號學<br><strong>專案成果：</strong> 逐格拆解《排球少年》或《鬼滅之刃》經典決戰 3 分鐘的分鏡格數、鏡頭景別切換頻率與配樂 BGM 升調點，製作動態分鏡拉片表與情緒起伏曲線。<br><strong>教授驚豔點：</strong> 展現超乎同儕的藝術解析力與影視產業幕後專業視角！"
+      },
+      fashion: {
+        title: "👟 題目提案：《一雙炒到兩萬的球鞋：限量潮鞋的稀缺性行銷與二手溢價分析》",
+        desc: "<strong>跨界學科：</strong> 市場行銷學 ✕ 供需經濟學 ✕ 次文化符號研究<br><strong>專案成果：</strong> 爬取 StockX 與台灣二手社團近兩年熱門鞋款的成交歷史數據，探討聯名話題、發售量與二級市場轉售溢價的相關性，產出一份市場預測報告。<br><strong>教授驚豔點：</strong> 具備敏銳的商管眼光、市場供需敏感度與數據追蹤能力！"
       },
       sleep: {
         title: "🛌 題目提案：《好眠救星：高中生晝夜節律與白噪音頻譜之睡眠品質影響研究》",
