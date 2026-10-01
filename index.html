@@ -26,7 +26,7 @@
     }
 
     html {
-      font-size: clamp(14px, min(1.15vw, 1.85vh), 21px);
+      font-size: clamp(19px, 1.35vw, 25px);
     }
 
     * {
@@ -62,15 +62,15 @@
       inset: 0;
       opacity: 0;
       pointer-events: none;
-      transform: scale(0.98) translateY(14px);
-      transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-                  transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-      padding: clamp(1.4rem, 3.2vh, 3.2rem) clamp(1.8rem, 4.5vw, 5rem);
+      transform: scale(0.98) translateY(12px);
+      transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      padding: clamp(1.2rem, 3vh, 2.8rem) clamp(1.8rem, 4vw, 4.5rem);
       display: flex;
       flex-direction: column;
-      justify-content: flex-start; /* 保證內容從頂部安全開始，絕不裁切頂部 */
+      justify-content: flex-start; /* 永遠頂部對齊，絕不裁切頂部 */
       align-items: flex-start;
-      overflow-y: auto; /* 螢幕空間不足時支援平滑滾動 */
+      overflow-y: auto; /* 空間不足時支援平滑滾動 */
       overflow-x: hidden;
       box-sizing: border-box;
       z-index: 1;
@@ -105,42 +105,46 @@
       align-items: flex-start;
     }
 
-    /* Badges & Tags */
+    /* Badges & Tags (大字體高對比) */
     .tag {
       display: inline-flex;
       align-items: center;
-      gap: 0.5rem;
-      padding: 0.4rem 1.2rem;
+      gap: 0.55rem;
+      padding: 0.45rem 1.3rem;
       border-radius: 9999px;
-      background: rgba(0, 242, 254, 0.12);
-      border: 1.5px solid rgba(0, 242, 254, 0.4);
-      color: var(--accent-cyan);
-      font-size: 1.05rem;
+      background: rgba(0, 242, 254, 0.14);
+      border: 1.8px solid rgba(0, 242, 254, 0.5);
+      color: #38bdf8;
+      font-size: clamp(1.1rem, 1.4vw, 1.35rem);
       font-weight: 800;
       letter-spacing: 0.04em;
       text-transform: uppercase;
       margin-bottom: 0.85rem;
+      text-shadow: 0 0 12px rgba(0, 242, 254, 0.3);
     }
 
     .tag.hot {
-      background: rgba(255, 42, 133, 0.15);
-      border-color: rgba(255, 42, 133, 0.5);
-      color: var(--accent-pink);
+      background: rgba(255, 42, 133, 0.16);
+      border-color: rgba(255, 42, 133, 0.6);
+      color: #ff3b88;
+      text-shadow: 0 0 12px rgba(255, 42, 133, 0.35);
     }
 
     .tag.purple {
-      background: rgba(157, 78, 221, 0.18);
-      border-color: rgba(157, 78, 221, 0.5);
-      color: #c77dff;
+      background: rgba(157, 78, 221, 0.2);
+      border-color: rgba(157, 78, 221, 0.6);
+      color: #d8b4fe;
+      text-shadow: 0 0 12px rgba(157, 78, 221, 0.35);
     }
 
-    /* Typography */
+    /* Typography (大舞台大螢幕高震撼力字體) */
     h1.hero-title {
-      font-size: clamp(2.3rem, 4.2vw, 3.6rem);
+      font-size: clamp(3rem, 5.2vw, 4.4rem);
       font-weight: 900;
-      line-height: 1.22;
-      margin-bottom: 1.1rem;
+      line-height: 1.2;
+      margin-bottom: 1.2rem;
       letter-spacing: -0.02em;
+      text-shadow: 0 4px 20px rgba(0,0,0,0.8);
     }
 
     .gradient-text {
@@ -157,65 +161,68 @@
 
     /* 點石成金：岩石灰與亮金光特效 */
     .text-stone {
-      background: linear-gradient(135deg, #f1f5f9 0%, #94a3b8 50%, #64748b 100%);
+      background: linear-gradient(135deg, #f8fafc 0%, #cbd5e1 50%, #94a3b8 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       display: inline-block;
     }
 
     .text-gold {
-      background: linear-gradient(135deg, #fffbeb 0%, #fde047 25%, #f59e0b 60%, #b45309 100%);
+      background: linear-gradient(135deg, #ffffff 0%, #fef08a 25%, #f59e0b 60%, #b45309 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       display: inline-block;
-      filter: drop-shadow(0 0 20px rgba(245, 158, 11, 0.65)) drop-shadow(0 2px 4px rgba(0, 0, 0, 0.6));
+      filter: drop-shadow(0 0 25px rgba(245, 158, 11, 0.8)) drop-shadow(0 2px 6px rgba(0, 0, 0, 0.8));
     }
 
     h2.section-title {
-      font-size: clamp(1.85rem, 3.2vw, 2.7rem);
-      font-weight: 800;
-      margin-bottom: 0.75rem;
+      font-size: clamp(2.3rem, 3.8vw, 3.4rem);
+      font-weight: 850;
+      margin-bottom: 0.8rem;
       letter-spacing: -0.02em;
       line-height: 1.25;
+      text-shadow: 0 2px 16px rgba(0,0,0,0.7);
     }
 
     p.subtitle {
-      font-size: clamp(1.05rem, 1.55vw, 1.4rem);
-      color: var(--text-muted);
-      line-height: 1.6;
-      max-width: 980px;
+      font-size: clamp(1.25rem, 1.8vw, 1.6rem);
+      color: #f1f5f9; /* 加亮提升對比 */
+      line-height: 1.65;
+      max-width: 1050px;
+      font-weight: 500;
     }
 
     /* Grid Layouts */
     .grid-2 {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: clamp(1rem, 2vw, 2.2rem);
+      gap: clamp(1.1rem, 2.2vw, 2.2rem);
       width: 100%;
-      margin-top: 1.3rem;
+      margin-top: 1.2rem;
     }
 
     .grid-3 {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: clamp(1rem, 1.8vw, 1.8rem);
+      gap: clamp(1rem, 2vw, 1.8rem);
       width: 100%;
-      margin-top: 1.3rem;
+      margin-top: 1.2rem;
     }
 
     /* Glass Cards */
     .card {
       background: var(--card-bg);
-      border: 1px solid var(--card-border);
+      border: 1.5px solid var(--card-border);
       backdrop-filter: blur(16px);
-      border-radius: 1.2rem;
-      padding: clamp(1.15rem, 2.2vh, 1.9rem);
+      border-radius: 1.25rem;
+      padding: clamp(1.2rem, 2.4vh, 2rem);
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
       position: relative;
       overflow: hidden;
       transition: border-color 0.3s ease, transform 0.3s ease;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.35);
     }
 
     .card::before {
@@ -238,77 +245,78 @@
     }
 
     .card h3 {
-      font-size: clamp(1.2rem, 1.75vw, 1.55rem);
+      font-size: clamp(1.45rem, 2.1vw, 1.85rem); /* 大標題 */
       font-weight: 800;
-      margin-bottom: 0.55rem;
-      color: #fff;
+      margin-bottom: 0.65rem;
+      color: #ffffff;
     }
 
     .card p {
-      font-size: clamp(0.96rem, 1.3vw, 1.18rem);
-      color: #cbd5e1;
-      line-height: 1.65;
+      font-size: clamp(1.15rem, 1.55vw, 1.35rem); /* 大內文字體，後排清晰可見 */
+      color: #f1f5f9;
+      line-height: 1.7;
+      font-weight: 500;
     }
 
     .card .icon {
-      font-size: 2.2rem;
-      margin-bottom: 0.55rem;
+      font-size: 2.6rem;
+      margin-bottom: 0.6rem;
     }
 
     /* Comparison Box */
     .versus-container {
       display: grid;
-      grid-template-columns: 1fr 55px 1fr;
-      gap: clamp(1rem, 1.8vw, 1.8rem);
+      grid-template-columns: 1fr 58px 1fr;
+      gap: clamp(1.1rem, 2vw, 1.8rem);
       width: 100%;
       align-items: center;
-      margin-top: 1.3rem;
+      margin-top: 1.2rem;
     }
 
     .vs-circle {
-      width: 52px;
-      height: 52px;
+      width: 56px;
+      height: 56px;
       border-radius: 50%;
-      background: rgba(255, 255, 255, 0.1);
-      border: 1.5px solid rgba(255, 255, 255, 0.25);
+      background: rgba(255, 255, 255, 0.12);
+      border: 2px solid rgba(255, 255, 255, 0.3);
       display: flex;
       align-items: center;
       justify-content: center;
       font-weight: 900;
-      font-size: 1.1rem;
+      font-size: 1.2rem;
       color: var(--accent-cyan);
       margin: 0 auto;
     }
 
     .code-block {
       background: #05070a;
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      border-radius: 0.8rem;
-      padding: clamp(0.85rem, 1.5vh, 1.25rem);
+      border: 1.5px solid rgba(0, 242, 254, 0.3);
+      border-radius: 0.85rem;
+      padding: clamp(1rem, 1.8vh, 1.4rem);
       font-family: 'JetBrains Mono', monospace;
-      font-size: clamp(0.92rem, 1.25vw, 1.12rem);
+      font-size: clamp(1.1rem, 1.4vw, 1.28rem);
       color: #38bdf8;
-      line-height: 1.6;
-      margin-top: 0.75rem;
+      line-height: 1.65;
+      margin-top: 0.85rem;
       user-select: text;
     }
 
     /* Live Interactive Demo Box */
     .alchemist-box {
       width: 100%;
-      background: rgba(18, 22, 34, 0.92);
-      border: 1.5px solid rgba(0, 242, 254, 0.4);
-      border-radius: 1.3rem;
-      padding: clamp(1.1rem, 2vh, 1.8rem);
-      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.45);
+      background: rgba(18, 22, 34, 0.95);
+      border: 1.5px solid rgba(0, 242, 254, 0.45);
+      border-radius: 1.35rem;
+      padding: clamp(1.2rem, 2.2vh, 1.9rem);
+      box-shadow: 0 15px 45px rgba(0, 0, 0, 0.55);
       margin-top: 0.9rem;
     }
 
     .quick-chips {
       display: flex;
-      gap: 0.5rem;
+      gap: 0.6rem;
       flex-wrap: wrap;
-      margin-top: 0.75rem;
+      margin-top: 0.85rem;
       max-height: 180px;
       overflow-y: auto;
       padding-right: 4px;
@@ -316,12 +324,12 @@
 
     .chip-btn {
       background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      color: #f1f5f9;
-      padding: 0.45rem 0.95rem;
+      border: 1.5px solid rgba(255, 255, 255, 0.25);
+      color: #f8fafc;
+      padding: 0.55rem 1.15rem;
       border-radius: 999px;
-      font-size: clamp(0.9rem, 1.15vw, 1.05rem);
-      font-weight: 700;
+      font-size: clamp(1.05rem, 1.3vw, 1.25rem);
+      font-weight: 750;
       cursor: pointer;
       transition: all 0.2s;
     }
@@ -329,63 +337,66 @@
     .chip-btn:hover, .chip-btn.active {
       background: var(--accent-cyan);
       color: #000;
-      font-weight: 800;
+      font-weight: 850;
       border-color: var(--accent-cyan);
+      box-shadow: 0 0 15px rgba(0, 242, 254, 0.4);
       transform: translateY(-2px);
     }
 
     .alchemist-result {
-      margin-top: 0.9rem;
-      padding: clamp(0.95rem, 1.5vh, 1.35rem);
-      background: rgba(0, 0, 0, 0.45);
-      border-radius: 0.9rem;
-      border-left: 5px solid var(--accent-cyan);
-      font-size: clamp(1.02rem, 1.35vw, 1.22rem);
-      line-height: 1.7;
+      margin-top: 1rem;
+      padding: clamp(1.1rem, 2vh, 1.5rem);
+      background: rgba(0, 0, 0, 0.5);
+      border-radius: 1rem;
+      border-left: 6px solid var(--accent-cyan);
+      font-size: clamp(1.15rem, 1.5vw, 1.38rem);
+      line-height: 1.75;
+      color: #ffffff;
     }
 
     /* Slide 7 Special Responsive Styles */
     .launch-guide-card {
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(0, 242, 254, 0.25);
-      border-radius: 0.9rem;
-      padding: 0.85rem 1.15rem;
-      margin-bottom: 0.85rem;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1.5px solid rgba(0, 242, 254, 0.35);
+      border-radius: 1rem;
+      padding: 0.95rem 1.35rem;
+      margin-bottom: 0.95rem;
     }
 
     .guide-badge {
-      font-size: clamp(0.9rem, 1.15vw, 1.05rem);
-      font-weight: 800;
+      font-size: clamp(1.1rem, 1.4vw, 1.25rem);
+      font-weight: 850;
       color: var(--accent-cyan);
-      margin-bottom: 0.55rem;
+      margin-bottom: 0.65rem;
       display: flex;
       align-items: center;
-      gap: 0.4rem;
+      gap: 0.5rem;
     }
 
     .guide-steps {
       display: flex;
       flex-direction: column;
-      gap: 0.4rem;
+      gap: 0.55rem;
     }
 
     .guide-step-item {
       display: flex;
       align-items: center;
-      gap: 0.65rem;
-      font-size: clamp(0.9rem, 1.2vw, 1.08rem);
-      color: #e2e8f0;
-      line-height: 1.4;
+      gap: 0.75rem;
+      font-size: clamp(1.12rem, 1.45vw, 1.28rem);
+      color: #ffffff;
+      font-weight: 600;
+      line-height: 1.45;
     }
 
     .step-num {
-      width: 22px;
-      height: 22px;
+      width: 26px;
+      height: 26px;
       border-radius: 50%;
       background: var(--accent-cyan);
       color: #000;
       font-weight: 900;
-      font-size: 0.8rem;
+      font-size: 0.9rem;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -394,18 +405,18 @@
 
     .btn-group-responsive {
       display: flex;
-      gap: 0.65rem;
+      gap: 0.75rem;
       flex-wrap: wrap;
       align-items: center;
-      margin-bottom: 0.85rem;
+      margin-bottom: 0.95rem;
     }
 
     .challenge-box {
-      background: rgba(0, 242, 254, 0.06);
-      border-left: 3px solid var(--accent-cyan);
-      border-radius: 0.5rem;
-      padding: 0.65rem 0.95rem;
-      font-size: clamp(0.9rem, 1.15vw, 1.08rem);
+      background: rgba(0, 242, 254, 0.08);
+      border-left: 4px solid var(--accent-cyan);
+      border-radius: 0.6rem;
+      padding: 0.75rem 1.15rem;
+      font-size: clamp(1.12rem, 1.4vw, 1.28rem);
     }
 
     .qr-col {
@@ -417,16 +428,16 @@
 
     .qr-box {
       background: #fff;
-      padding: 0.8rem;
-      border-radius: 1rem;
+      padding: 0.85rem;
+      border-radius: 1.1rem;
       display: flex;
       align-items: center;
       justify-content: center;
-      width: clamp(160px, 17vw, 230px);
-      height: clamp(160px, 17vw, 230px);
-      max-height: 28vh;
-      max-width: 28vh;
-      box-shadow: 0 10px 30px rgba(0, 242, 254, 0.25);
+      width: clamp(170px, 18vw, 240px);
+      height: clamp(170px, 18vw, 240px);
+      max-height: 30vh;
+      max-width: 30vh;
+      box-shadow: 0 15px 35px rgba(0, 242, 254, 0.3);
     }
 
     .qr-box img {
@@ -437,28 +448,28 @@
     }
 
     .qr-title {
-      margin-top: 0.65rem;
+      margin-top: 0.75rem;
       color: var(--accent-cyan);
-      font-size: clamp(0.92rem, 1.25vw, 1.12rem);
-      font-weight: 800;
+      font-size: clamp(1.15rem, 1.45vw, 1.35rem);
+      font-weight: 850;
       text-align: center;
     }
 
     .qr-url {
       color: #94a3b8;
-      font-size: 0.75rem;
-      margin-top: 0.2rem;
+      font-size: 0.82rem;
+      margin-top: 0.25rem;
       word-break: break-all;
-      max-width: 250px;
+      max-width: 260px;
       text-align: center;
     }
 
     /* UI Controls & Navigation Bar */
     #controls {
-      height: clamp(52px, 6.8vh, 68px);
-      background: rgba(9, 11, 16, 0.94);
+      height: 64px;
+      background: rgba(9, 11, 16, 0.95);
       backdrop-filter: blur(14px);
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -469,33 +480,34 @@
 
     .btn {
       background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.2);
+      border: 1.5px solid rgba(255, 255, 255, 0.25);
       color: #fff;
-      padding: 0.55rem 1.05rem;
-      border-radius: 0.55rem;
-      font-size: clamp(0.88rem, 1.05vw, 1.02rem);
-      font-weight: 700;
+      padding: 0.65rem 1.25rem;
+      border-radius: 0.6rem;
+      font-size: clamp(1.05rem, 1.25vw, 1.2rem);
+      font-weight: 750;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
-      gap: 0.5rem;
+      gap: 0.55rem;
       transition: all 0.2s;
     }
 
     .btn:hover {
-      background: rgba(255, 255, 255, 0.18);
-      border-color: rgba(255, 255, 255, 0.35);
+      background: rgba(255, 255, 255, 0.2);
+      border-color: rgba(255, 255, 255, 0.4);
     }
 
     .btn.primary {
       background: var(--accent-cyan);
       color: #000;
+      font-weight: 850;
       border: none;
     }
 
     .btn.primary:hover {
       background: #38bdf8;
-      box-shadow: 0 0 15px rgba(0, 242, 254, 0.4);
+      box-shadow: 0 0 18px rgba(0, 242, 254, 0.5);
     }
 
     .progress-bar-wrap {
@@ -503,7 +515,7 @@
       top: 0;
       left: 0;
       width: 100%;
-      height: 4px;
+      height: 5px;
       background: rgba(255, 255, 255, 0.06);
     }
 
@@ -519,18 +531,18 @@
       position: fixed;
       bottom: 75px;
       right: 2rem;
-      width: min(420px, 90vw);
-      max-height: 40vh;
+      width: min(440px, 90vw);
+      max-height: 42vh;
       overflow-y: auto;
       background: rgba(15, 23, 42, 0.96);
       border: 1px solid rgba(0, 242, 254, 0.4);
       border-radius: 1rem;
-      padding: 1.2rem;
+      padding: 1.3rem;
       box-shadow: 0 10px 40px rgba(0,0,0,0.8);
       display: none;
       flex-direction: column;
       z-index: 200;
-      font-size: 0.95rem;
+      font-size: 1.05rem;
       line-height: 1.6;
       color: #cbd5e1;
     }
@@ -544,6 +556,7 @@
       margin-bottom: 0.5rem;
       display: flex;
       justify-content: space-between;
+      font-size: 1.15rem;
     }
 
     /* Fullscreen Interactive Modal Styles */
@@ -568,7 +581,7 @@
       border: 1.5px solid rgba(0, 242, 254, 0.35);
       border-radius: 1.3rem;
       width: 100%;
-      max-width: 860px;
+      max-width: 880px;
       height: min(85vh, 760px);
       display: flex;
       flex-direction: column;
@@ -583,7 +596,7 @@
     }
 
     .modal-header {
-      padding: 1rem 1.4rem;
+      padding: 1.1rem 1.5rem;
       background: rgba(18, 24, 38, 0.95);
       border-bottom: 1px solid rgba(255, 255, 255, 0.08);
       display: flex;
@@ -593,25 +606,25 @@
 
     .modal-body {
       flex: 1;
-      padding: 1.2rem;
+      padding: 1.3rem;
       overflow-y: auto;
       display: flex;
       flex-direction: column;
-      gap: 1rem;
+      gap: 1.1rem;
     }
 
     .modal-footer {
-      padding: 0.8rem 1.2rem;
+      padding: 0.9rem 1.4rem;
       background: rgba(15, 20, 32, 0.95);
       border-top: 1px solid rgba(255, 255, 255, 0.08);
       display: flex;
-      gap: 0.7rem;
+      gap: 0.8rem;
       align-items: center;
     }
 
     .chat-bubble {
       display: flex;
-      gap: 0.8rem;
+      gap: 0.9rem;
       max-width: 90%;
       animation: fadeIn 0.3s ease;
     }
@@ -631,23 +644,23 @@
     }
 
     .chat-avatar {
-      width: 38px;
-      height: 38px;
+      width: 42px;
+      height: 42px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.2rem;
+      font-size: 1.3rem;
       flex-shrink: 0;
       background: rgba(255, 255, 255, 0.08);
       border: 1px solid rgba(255, 255, 255, 0.2);
     }
 
     .chat-content {
-      padding: 0.9rem 1.2rem;
-      border-radius: 1rem;
-      font-size: 1.05rem;
-      line-height: 1.6;
+      padding: 1rem 1.3rem;
+      border-radius: 1.1rem;
+      font-size: 1.15rem;
+      line-height: 1.65;
       user-select: text;
     }
 
@@ -668,9 +681,9 @@
       background: rgba(0, 242, 254, 0.1);
       border: 1px solid rgba(0, 242, 254, 0.3);
       color: #38bdf8;
-      padding: 0.4rem 0.85rem;
+      padding: 0.45rem 0.95rem;
       border-radius: 999px;
-      font-size: 0.92rem;
+      font-size: 1rem;
       font-weight: 600;
       cursor: pointer;
       transition: all 0.2s;
@@ -686,10 +699,10 @@
       flex: 1;
       background: rgba(5, 8, 14, 0.8);
       border: 1.5px solid rgba(255, 255, 255, 0.15);
-      border-radius: 0.7rem;
-      padding: 0.75rem 1rem;
+      border-radius: 0.8rem;
+      padding: 0.8rem 1.1rem;
       color: #fff;
-      font-size: 1.05rem;
+      font-size: 1.15rem;
       font-family: inherit;
       outline: none;
       transition: border-color 0.2s;
@@ -700,136 +713,136 @@
     }
 
     /* ====================================================
-       RESPONSIVE BREAKPOINTS (Laptops, Tablets, Mobiles)
+       RESPONSIVE BREAKPOINTS (堅持大字體！只微調節奏與間距)
        ==================================================== */
     @media (max-height: 850px) {
       .slide {
         padding: 1.1rem clamp(1.4rem, 3.2vw, 3.2rem);
       }
       h1.hero-title {
-        font-size: 2.5rem;
-        margin-bottom: 0.7rem;
+        font-size: 2.9rem;
+        margin-bottom: 0.8rem;
       }
       h2.section-title {
-        font-size: 1.95rem;
-        margin-bottom: 0.45rem;
+        font-size: 2.3rem;
+        margin-bottom: 0.55rem;
       }
       .tag {
-        font-size: 0.88rem;
-        padding: 0.3rem 0.85rem;
-        margin-bottom: 0.5rem;
+        font-size: 1.1rem;
+        padding: 0.35rem 1.1rem;
+        margin-bottom: 0.6rem;
       }
       p.subtitle {
-        font-size: 1.08rem;
-        line-height: 1.5;
+        font-size: 1.25rem;
+        line-height: 1.55;
       }
       .grid-2, .grid-3 {
-        gap: 0.9rem;
-        margin-top: 0.9rem;
+        gap: 1rem;
+        margin-top: 1rem;
       }
       .card {
-        padding: 1.1rem;
+        padding: 1.15rem 1.4rem;
       }
       .card h3 {
-        font-size: 1.25rem;
-        margin-bottom: 0.35rem;
+        font-size: 1.42rem;
+        margin-bottom: 0.45rem;
       }
       .card p {
-        font-size: 1rem;
-        line-height: 1.5;
+        font-size: 1.18rem;
+        line-height: 1.6;
       }
       .card .icon {
-        font-size: 1.8rem;
-        margin-bottom: 0.3rem;
+        font-size: 2.2rem;
+        margin-bottom: 0.4rem;
       }
       .alchemist-box {
-        padding: 1rem;
-        margin-top: 0.7rem;
+        padding: 1.1rem;
+        margin-top: 0.8rem;
       }
       .quick-chips {
         max-height: 140px;
       }
       .chip-btn {
-        padding: 0.35rem 0.75rem;
-        font-size: 0.92rem;
-      }
-      .alchemist-result {
-        margin-top: 0.7rem;
-        padding: 0.9rem;
+        padding: 0.4rem 0.95rem;
         font-size: 1.05rem;
       }
+      .alchemist-result {
+        margin-top: 0.8rem;
+        padding: 1rem 1.2rem;
+        font-size: 1.2rem;
+      }
       .code-block {
-        padding: 0.8rem;
-        font-size: 0.98rem;
+        padding: 0.9rem 1.1rem;
+        font-size: 1.12rem;
       }
       #controls {
-        height: 54px;
+        height: 58px;
       }
     }
 
     @media (max-height: 720px) {
       .slide {
-        padding: 0.8rem 1.6rem;
+        padding: 0.8rem 1.8rem;
       }
       h1.hero-title {
-        font-size: 2rem;
-        margin-bottom: 0.4rem;
+        font-size: 2.5rem;
+        margin-bottom: 0.5rem;
       }
       h2.section-title {
-        font-size: 1.6rem;
-        margin-bottom: 0.3rem;
+        font-size: 2.1rem;
+        margin-bottom: 0.4rem;
       }
       .tag {
-        font-size: 0.8rem;
-        padding: 0.2rem 0.7rem;
-        margin-bottom: 0.3rem;
+        font-size: 1.05rem;
+        padding: 0.3rem 0.9rem;
+        margin-bottom: 0.45rem;
       }
       p.subtitle {
-        font-size: 0.95rem;
-        line-height: 1.4;
+        font-size: 1.18rem;
+        line-height: 1.5;
       }
       .card {
-        padding: 0.85rem;
+        padding: 0.95rem 1.2rem;
       }
       .card h3 {
-        font-size: 1.1rem;
+        font-size: 1.35rem;
       }
       .card p {
-        font-size: 0.9rem;
-        line-height: 1.4;
+        font-size: 1.14rem;
+        line-height: 1.55;
       }
       .launch-guide-card {
-        padding: 0.65rem 0.85rem;
-        margin-bottom: 0.55rem;
+        padding: 0.75rem 1.1rem;
+        margin-bottom: 0.65rem;
       }
       .guide-badge {
-        font-size: 0.85rem;
-        margin-bottom: 0.35rem;
+        font-size: 1.05rem;
+        margin-bottom: 0.45rem;
       }
       .guide-step-item {
-        font-size: 0.85rem;
+        font-size: 1.1rem;
       }
       .btn-group-responsive {
-        margin-bottom: 0.55rem;
+        margin-bottom: 0.65rem;
       }
       .btn {
-        padding: 0.4rem 0.8rem;
-        font-size: 0.85rem;
+        padding: 0.5rem 1rem;
+        font-size: 1.05rem;
       }
       #controls {
-        height: 46px;
-        padding: 0 1rem;
+        height: 52px;
+        padding: 0 1.2rem;
       }
     }
 
     @media (max-width: 960px) {
       .grid-2, .grid-3 {
         grid-template-columns: 1fr;
-        gap: 0.9rem;
+        gap: 1rem;
       }
       .versus-container {
         grid-template-columns: 1fr;
-        gap: 0.75rem;
+        gap: 0.85rem;
       }
       .vs-circle {
         margin: 0 auto;
@@ -844,17 +857,17 @@
 
     @media (max-width: 640px) {
       .slide {
-        padding: 0.8rem 0.9rem;
+        padding: 0.8rem 1rem;
       }
       #controls {
         height: auto;
-        padding: 0.5rem 0.75rem;
+        padding: 0.6rem 0.8rem;
         flex-direction: column;
-        gap: 0.35rem;
+        gap: 0.4rem;
       }
       #controls .btn {
-        padding: 0.35rem 0.6rem;
-        font-size: 0.78rem;
+        padding: 0.4rem 0.75rem;
+        font-size: 0.95rem;
       }
     }
   </style>
