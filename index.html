@@ -758,16 +758,16 @@
 
         <div style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
           <div class="qr-box" style="width: 270px; height: 270px; padding: 1.2rem; box-shadow: 0 10px 30px rgba(0,242,254,0.3);">
-            <!-- 真實可掃描的 QR Code -->
-            <img id="qrCodeImg" src="https://api.qrserver.com/v1/create-qr-code/?size=240x240&data=https://binruei02.github.io/ai-learning-1007/" 
-                 alt="Scan to open AI Coach Presentation" 
+            <!-- 真實可掃描的 QR Code，直通官方 Gem -->
+            <img id="qrCodeImg" src="https://api.qrserver.com/v1/create-qr-code/?size=240x240&data=https%3A%2F%2Fgemini.google.com%2Fgem%2F1hMAbvXpOFQaWVeNY8d4WOZEAeoIuCP0T%3Fusp%3Dsharing" 
+                 alt="Scan to open AI Coach Gem" 
                  style="width: 100%; height: 100%; border-radius: 0.5rem; object-fit: contain;">
           </div>
           <div style="margin-top: 1rem; color: var(--accent-cyan); font-size: 1.2rem; font-weight: 800;">
-            📲 手機相機掃描立即開啟
+            📲 手機相機掃描直達 Gem
           </div>
-          <div id="qrLabelText" style="color: #94a3b8; font-size: 0.92rem; margin-top: 0.25rem; word-break: break-all; max-width: 260px; text-align: center;">
-            https://binruei02.github.io/ai-learning-1007
+          <div id="qrLabelText" style="color: #94a3b8; font-size: 0.82rem; margin-top: 0.25rem; word-break: break-all; max-width: 260px; text-align: center;">
+            https://gemini.google.com/gem/1hMAbvXpOFQaWVeNY8d4WOZEAeoIuCP0T?usp=sharing
           </div>
         </div>
       </div>
@@ -1039,7 +1039,7 @@
     }
 
     // Gem Direct Launch & Link Binding
-    let customGemUrl = localStorage.getItem('CUSTOM_GEM_URL') || 'https://gemini.google.com/app';
+    let customGemUrl = localStorage.getItem('CUSTOM_GEM_URL') || 'https://gemini.google.com/gem/1hMAbvXpOFQaWVeNY8d4WOZEAeoIuCP0T?usp=sharing';
 
     function launchGemCoach() {
       window.open(customGemUrl, '_blank');
