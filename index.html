@@ -269,6 +269,38 @@
       margin-bottom: 0.6rem;
     }
 
+    /* 課後推薦：沿用簡報卡片，保留清楚的任務與網站入口 */
+    .resource-card {
+      gap: 0.8rem;
+      min-width: 0;
+    }
+
+    .resource-card h3 {
+      margin-bottom: 0;
+      overflow-wrap: anywhere;
+    }
+
+    .resource-task {
+      padding: 0.8rem 1rem;
+      border-left: 3px solid var(--accent-cyan);
+      background: rgba(0, 242, 254, 0.06);
+      border-radius: 0.4rem;
+    }
+
+    .resource-card .resource-link,
+    .resource-card .resource-link:visited {
+      align-self: flex-start;
+      margin-top: auto;
+      white-space: normal;
+      text-decoration: none;
+      color: #000;
+    }
+
+    .resource-link:focus-visible {
+      outline: 3px solid #facc15;
+      outline-offset: 4px;
+    }
+
     /* Comparison Box */
     .versus-container {
       display: grid;
@@ -1212,6 +1244,95 @@
       </div>
     </div>
 
+    <!-- Slide 10: 推薦網站 — 動手理解 -->
+    <div class="slide" data-notes="【延伸資源：動手理解】介紹教育部因材網整合的 PhET 互動模擬。提醒學生用學校教育雲端帳號/OpenID 登入即可，不用額外註冊帳號。以電路模擬為例：固定電壓，只改電阻，讓學生先預測再驗證。接著開啟 Desmos，輸入 y=a(x-h)^2+k，逐一調整滑桿。提醒每次只改一個參數，留下截圖與自己的解釋。網站連結皆以新分頁開啟。">
+      <div class="slide-content">
+        <div class="tag">🧪 自主學習工具箱 · 1 / 4</div>
+        <h2 class="section-title">公式太抽象？自己動手看懂。</h2>
+        <p class="subtitle">先預測 → 改變一個變因 → 觀察 → 用自己的話解釋。</p>
+        <div class="grid-2">
+          <article class="card resource-card">
+            <h3>教育部因材網（PhET 互動模擬）</h3>
+            <p><strong>適合：</strong>物理、化學與自然探究。整合 PhET 虛擬實驗與學具，<strong>直接用學校教育雲端帳號（OpenID）登入，免另註冊帳號</strong>。</p>
+            <p class="resource-task"><strong>今天的小任務</strong><br>固定電壓，改變電阻，記錄 3 組電流數據：結果符合你的預測嗎？</p>
+            <a class="btn primary resource-link" href="https://adl.edu.tw/" target="_blank" rel="noopener noreferrer">開啟因材網 ↗（新分頁）</a>
+          </article>
+          <article class="card resource-card">
+            <h3>Desmos 圖形計算機</h3>
+            <p><strong>適合：</strong>數學函數與圖形理解。輸入公式、拖動滑桿，觀察參數如何改變圖形。</p>
+            <p class="resource-task"><strong>今天的小任務</strong><br>輸入 y=a(x-h)²+k，分別調整 a、h、k，截圖並說明圖形的變化。</p>
+            <a class="btn primary resource-link" href="https://www.desmos.com/calculator?lang=zh-TW" target="_blank" rel="noopener noreferrer">開啟 Desmos ↗（新分頁）</a>
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 11: 推薦網站 — 英文練習 -->
+    <div class="slide" data-notes="【延伸資源：英文練習】介紹教育部 Cool English 英語線上學習平台。學生直接用教育雲端帳號登入，完全免費且貼合高中生學習需求。請學生挑喜歡的主題練習聽力與口說。程度較吃力的同學，可以先練 30 秒到 1 分鐘。重點是聽懂、跟讀與隔天複習，留下學習成果與跟讀錄音。">
+      <div class="slide-content">
+        <div class="tag purple">🎧 自主學習工具箱 · 2 / 4</div>
+        <h2 class="section-title">英文每天練一點，真的聽懂。</h2>
+        <p class="subtitle">從感興趣的短內容開始，讓聽力練習變成可持續的小習慣。</p>
+        <div class="grid-2">
+          <article class="card resource-card">
+            <h3>Cool English 英語線上學習平台</h3>
+            <p><strong>適合：</strong>高中生英文聽力、口說與自主學習。教育部國教署建置，支援教育雲端帳號登入，具備豐富主題課程與即時語音辨識反饋。</p>
+            <p class="resource-task"><strong>今天的小任務</strong><br>在高中專區挑一個有興趣的聽力或口說單元，選 3 句跟讀錄音，並用自己的話記下重點。</p>
+            <a class="btn primary resource-link" href="https://www.coolenglish.edu.tw/" target="_blank" rel="noopener noreferrer">開啟 Cool English ↗（新分頁）</a>
+          </article>
+          <div class="card success resource-card">
+            <h3>四步驟，把「聽過」變「學會」</h3>
+            <p>① 先不看稿聽一次，抓住大意。<br>② 看逐字稿，確認沒聽懂的地方。<br>③ 選 3 句暫停跟讀，錄下自己的聲音。<br>④ 隔天再聽一次，檢查進步。</p>
+            <p class="resource-task"><strong>留下學習成果</strong><br>3 個實用表達＋一段跟讀錄音。覺得太難，就先從 30 秒開始。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 12: 推薦網站 — 探索興趣 -->
+    <div class="slide" data-notes="【延伸資源：探索興趣】TED-Ed 適合從好奇心找問題；臺大開放式課程適合試探大學領域。字幕與先備知識依內容而異，鼓勵學生先選入門主題，不必整門修完。收尾請每位學生選一個網站，寫下一個問題與本週能完成的小成果：自主學習不是收藏網站，而是帶著問題探索、留下自己的理解。">
+      <div class="slide-content">
+        <div class="tag hot">🔎 自主學習工具箱 · 3 / 4</div>
+        <h2 class="section-title">不知道研究什麼？從好奇開始。</h2>
+        <p class="subtitle">今天選一個網站、帶著一個問題，這週留下一個自己的學習成果。</p>
+        <div class="grid-2">
+          <article class="card resource-card">
+            <h3>TED-Ed</h3>
+            <p><strong>適合：</strong>尋找自主學習題目。用短篇動畫探索科學、人文與心理；部分影片有中文字幕。</p>
+            <p class="resource-task"><strong>今天的小任務</strong><br>看一部感興趣的影片，寫下 3 個「我還想知道」，選一個能進一步查證的問題。</p>
+            <a class="btn primary resource-link" href="https://ed.ted.com/" target="_blank" rel="noopener noreferrer">開啟 TED-Ed ↗（新分頁）</a>
+          </article>
+          <article class="card resource-card">
+            <h3>臺大開放式課程</h3>
+            <p><strong>適合：</strong>探索大學科系與深入興趣。先挑入門單元試聽，了解這個領域實際在學什麼。</p>
+            <p class="resource-task"><strong>今天的小任務</strong><br>看一堂課，記下 3 個新概念、2 個疑問，以及 1 個想繼續研究的方向。</p>
+            <a class="btn primary resource-link" href="https://ocw.aca.ntu.edu.tw/ntu-ocw/" target="_blank" rel="noopener noreferrer">開啟臺大開放式課程 ↗（新分頁）</a>
+          </article>
+        </div>
+      </div>
+    </div>
+    <!-- Slide 13: 推薦網站 — 中文程式學習 -->
+    <div class="slide" data-notes="【延伸資源：中文程式學習】用『均一學觀念，ZeroJudge 動手練』介紹兩個平台。零基礎同學先在均一找程式入門教材，理解變數、條件判斷與迴圈，再挑選自己使用的程式語言練習。已有基礎的同學可到 ZeroJudge，從 a001 哈囉開始，理解讀取輸入與輸出格式。送出程式通常需要登入；事先準備帳號以利示範。強調判題未通過是除錯的起點，請學生保存錯誤、修改方式與測試結果，作為學習歷程。">
+      <div class="slide-content">
+        <div class="tag">💻 自主學習工具箱 · 4 / 4</div>
+        <h2 class="section-title">想學寫程式？中文資源就能開始。</h2>
+        <p class="subtitle">均一學觀念，ZeroJudge 動手練：寫程式 → 測試 → 修改 → 再試一次。</p>
+        <div class="grid-2">
+          <article class="card resource-card">
+            <h3>均一教育平台</h3>
+            <p><strong>適合：</strong>零基礎入門。從中文程式教材開始，逐步理解變數、條件判斷與迴圈等基本概念。</p>
+            <p class="resource-task"><strong>今天的小任務</strong><br>搜尋「程式」，選一段入門教材。跟著做一次，再改一個條件，說明結果有什麼不同。</p>
+            <a class="btn primary resource-link" href="https://www.junyiacademy.org/" target="_blank" rel="noopener noreferrer">開啟均一教育平台 ↗（新分頁）</a>
+          </article>
+          <article class="card resource-card">
+            <h3>ZeroJudge 高中生程式解題系統</h3>
+            <p><strong>適合：</strong>已懂基本語法、想練 Python 或 C++ 的學生。透過繁體中文題庫與線上判題練習，也可用於 APCS 備考。</p>
+            <p class="resource-task"><strong>今天的小任務</strong><br>從 a001「哈囉」開始，讀懂輸入與輸出格式，送出程式。若未通過，記下原因並修改再試。</p>
+            <a class="btn primary resource-link" href="https://zerojudge.tw/" target="_blank" rel="noopener noreferrer">開啟 ZeroJudge ↗（新分頁）</a>
+          </article>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- Bottom Control Bar -->
@@ -1219,7 +1340,7 @@
     <div style="display: flex; align-items: center; gap: 1rem;">
       <span style="font-weight: 800; font-size: 1rem; color: #fff; letter-spacing: 0.05em;">AI ✕ 自主學習探索</span>
       <span style="color: var(--text-muted); font-size: 0.85rem;">|</span>
-      <span id="slideCounter" style="font-family: 'JetBrains Mono', monospace; font-size: 0.95rem; color: var(--accent-cyan);">01 / 09</span>
+      <span id="slideCounter" style="font-family: 'JetBrains Mono', monospace; font-size: 0.95rem; color: var(--accent-cyan);">01 / 13</span>
     </div>
 
     <div style="display: flex; align-items: center; gap: 0.75rem;">
